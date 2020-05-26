@@ -36,4 +36,9 @@
       <Filter>File di risorse</Filter>
     </Text>
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.c">
+      <Filter>File di origine</Filter>
+    </ClCompile>
+  </ItemGroup>
 </Project>
