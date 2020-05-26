@@ -37,7 +37,7 @@
     </Text>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp">
+    <ClCompile Include="main.c">
       <Filter>File di origine</Filter>
     </ClCompile>
   </ItemGroup>

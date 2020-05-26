@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "headers/definers.h"
-#include "headers/graphlib.h"
-#include "headers/utentilib.h"
+#include "definers.h"
+#include "graphlib.h"
+#include "utentilib.h"
 
 int main() {
 
