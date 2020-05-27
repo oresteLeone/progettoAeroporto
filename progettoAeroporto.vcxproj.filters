@@ -30,6 +30,9 @@
     <ClInclude Include="utentilib.h">
       <Filter>File di intestazione</Filter>
     </ClInclude>
+    <ClInclude Include="guilib.h">
+      <Filter>File di intestazione</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="notes.txt">
@@ -38,6 +41,21 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.c">
+      <Filter>File di origine</Filter>
+    </ClCompile>
+    <ClCompile Include="guilib.c">
+      <Filter>File di origine</Filter>
+    </ClCompile>
+    <ClCompile Include="graphlib.c">
+      <Filter>File di origine</Filter>
+    </ClCompile>
+    <ClCompile Include="edgelib.c">
+      <Filter>File di origine</Filter>
+    </ClCompile>
+    <ClCompile Include="prenotazionilib.c">
+      <Filter>File di origine</Filter>
+    </ClCompile>
+    <ClCompile Include="utentilib.c">
       <Filter>File di origine</Filter>
     </ClCompile>
   </ItemGroup>

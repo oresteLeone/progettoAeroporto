@@ -22,6 +22,7 @@
     <ClInclude Include="definers.h" />
     <ClInclude Include="edgelib.h" />
     <ClInclude Include="graphlib.h" />
+    <ClInclude Include="guilib.h" />
     <ClInclude Include="prenotazionilib.h" />
     <ClInclude Include="utentilib.h" />
   </ItemGroup>
@@ -29,7 +30,12 @@
     <Text Include="notes.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="edgelib.c" />
+    <ClCompile Include="graphlib.c" />
+    <ClCompile Include="guilib.c" />
     <ClCompile Include="main.c" />
+    <ClCompile Include="prenotazionilib.c" />
+    <ClCompile Include="utentilib.c" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
