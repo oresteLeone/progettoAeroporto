@@ -56,5 +56,12 @@ void eliminaNodoUtente(Utente** radUtente, char* nome) {
 }
 
 char* ricercaMinUtente(Utente* radUtente) {
-
+    char min[maxstring];
+    if (radUtente) {
+        if (radUtente->sx == NULL)
+            strcpy(min, radUtente->nomeUtente);
+        else
+            strcpy(min, ricercaMinUtente(radUtente->sx));
+    }
+    return min;
 }
