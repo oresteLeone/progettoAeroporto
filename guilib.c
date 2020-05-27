@@ -19,13 +19,6 @@ char catchRequest()
         else
             printf("\nRichiesta non valida\n");
     }
-    
-    
-    /*while (scanf("%d", &richiesta) != 1) {
-        printf("\nInserisca '0' per il Login\nInserisca '1' per Registrarsi\nInserisca '2' per Chiudere\n ");
-        printf("\nCosa vuole fare?: ");
-        while (getchar() != '\n');
-    }*/
-
+ 
     return richiesta;
 }
