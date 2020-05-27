@@ -26,7 +26,7 @@ int main() {
 					quit = 1;
 					break;
 				default:
-					printf("Richiesta non valida\n");
+					printf("\nRichiesta non valida\n");
 					break;
 			}
 	} while (quit != 1);
