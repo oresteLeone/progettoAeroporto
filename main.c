@@ -30,7 +30,7 @@ int main() {
 					do {
 						printf("Salve, per registrarsi inserisca un username:\n");
 						scanf("%s", user);
-						flag = ricercaUtente(radUtente, user);
+						flag = ricercaUtente(radUtente, user);        //mi passo l'user appena inserito per controllare se è disponibile
 						if (flag == 1)
 							printf("Nome utente non disponibile. Riprovi:\n");
 						else
