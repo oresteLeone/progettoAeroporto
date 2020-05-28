@@ -17,4 +17,7 @@ typedef struct lista_destinazioni {
     struct lista_destinazioni* next;    //puntatore ad ulteriore destinazione, in caso di scalo
 } destinazione;
 
+////funzione per la creazione della prenotazione
+//prenotazione* createPrenotazione();
+
 #endif

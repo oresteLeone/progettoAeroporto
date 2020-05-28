@@ -3,12 +3,13 @@
 #include <string.h>
 #include "guilib.h"
 
+//funzione per ottenere le richieste di un singolo carattere in input
 char catchRequest()
 {
     char richiesta, buf[maxstring];
 
     while(1){
-        printf("\nInserisca '1' per il Login\nInserisca '2' per Registrarsi\nInserisca '0' per Chiudere\n ");
+        
         printf("\nCosa vuole fare?: ");
         fgets(buf, maxstring, stdin);
 
@@ -21,4 +22,23 @@ char catchRequest()
     }
  
     return richiesta;
+}
+
+//funzione per ottenere le stringhe in input
+char* getString() {
+    char string[maxstring], buf[maxstring];
+
+    while (1) {
+        fgets(buf, maxstring, stdin);
+        
+        if (!strchr(buf, '\n'))     //newline does not exist
+            while (fgetc(stdin) != '\n');//discard until newline
+        else {
+            size_t len = strlen(buf);
+            buf[len - 1] = '\0';
+        }
+        strcpy(string, buf);
+        break;   
+    }
+    return string;
 }

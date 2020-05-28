@@ -7,13 +7,14 @@
 #include "guilib.h"
 
 int main() {
-	
+	char string[maxstring];
 	char richiesta;
 	int quit = 0;
 	char* user, passwd; 
 	int flag = 0;
 	
 	do {
+			printf("\nInserisca '1' per il Login\nInserisca '2' per Registrarsi\nInserisca '0' per Chiudere\n ");
 			richiesta = catchRequest();
 			user = (char*)malloc(sizeof(char) * 20);
 			passwd = (char*)malloc(sizeof(char) * 20);
@@ -21,6 +22,9 @@ int main() {
 			switch (richiesta) {
 				case '1':
 					printf("\nLogin...\n");
+					printf("inserisci nome utente: ");
+					strcpy(string, getString());
+					printf("\nStringa inserita: %s lunghezza:%d ", string, strlen(string));
 					break;
 				case '2':
 					printf("Salve, per registrarsi inserisca un username:\n");
