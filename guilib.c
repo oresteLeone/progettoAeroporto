@@ -12,7 +12,7 @@ char catchRequest()
         printf("\nCosa vuole fare?: ");
         fgets(buf, maxstring, stdin);
 
-        if (strlen(buf) == 0) {
+        if (strlen(buf) == 2) {
             richiesta = buf[0];
             break;
         }
