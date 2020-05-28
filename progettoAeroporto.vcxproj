@@ -23,6 +23,7 @@
     <ClInclude Include="edgelib.h" />
     <ClInclude Include="graphlib.h" />
     <ClInclude Include="guilib.h" />
+    <ClInclude Include="listlib.h" />
     <ClInclude Include="prenotazionilib.h" />
     <ClInclude Include="utentilib.h" />
   </ItemGroup>
@@ -33,6 +34,7 @@
     <ClCompile Include="edgelib.c" />
     <ClCompile Include="graphlib.c" />
     <ClCompile Include="guilib.c" />
+    <ClCompile Include="listlib.c" />
     <ClCompile Include="main.c" />
     <ClCompile Include="prenotazionilib.c" />
     <ClCompile Include="utentilib.c" />

@@ -33,6 +33,9 @@
     <ClInclude Include="guilib.h">
       <Filter>File di intestazione</Filter>
     </ClInclude>
+    <ClInclude Include="listlib.h">
+      <Filter>File di intestazione</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="notes.txt">
@@ -56,6 +59,9 @@
       <Filter>File di origine</Filter>
     </ClCompile>
     <ClCompile Include="utentilib.c">
+      <Filter>File di origine</Filter>
+    </ClCompile>
+    <ClCompile Include="listlib.c">
       <Filter>File di origine</Filter>
     </ClCompile>
   </ItemGroup>
