@@ -7,7 +7,7 @@
 #include "guilib.h"
 
 int main() {
-	
+	char string[maxstring];
 	char richiesta;
 	int quit = 0;
 	
@@ -18,6 +18,9 @@ int main() {
 			switch (richiesta) {
 				case '1':
 					printf("\nLogin...\n");
+					printf("inserisci nome utente: ");
+					strcpy(string, getString());
+					printf("\nStringa inserita: %s lunghezza:%d ", string, strlen(string));
 					break;
 				case '2':
 					printf("\nRegistrazione...\n");
