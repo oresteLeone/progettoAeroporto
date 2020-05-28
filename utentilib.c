@@ -108,3 +108,15 @@ void visitaInPreOrdineUtenti(Utente* radUtente) {
         visitaInPreOrdineUtenti(radUtente->dx);
     }
 }
+
+//
+////funzione per l'aggiunta di un nodo Prenotazione
+//prenotazione* AddNodoPrenotazioneToUser(prenotazione *head/*, dati da inserire*/) {
+//    if (head == NULL) {
+//        head=createPrenotazione();
+//    }
+//    else {
+//
+//        head = AddNodoPrenotazioneToUser(head->next);
+//    }
+//} 
