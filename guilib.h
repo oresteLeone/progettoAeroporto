@@ -8,5 +8,10 @@ char catchRequest();
 //funzione per ottenere le stringhe in input
 char* getString();
 
+//menù dell'admin
+void menùAdmin();
+
+//menù dell'utente
+void menùUtente();
 
 #endif

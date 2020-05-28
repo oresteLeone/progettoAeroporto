@@ -3,13 +3,12 @@
 #include <string.h>
 #include "utentilib.h"
 
-
 //funzione aggiunta nodo utente nell'ABR utenti
-void addNodoUtente(Utente** radUtente, char* nome, int password) {
+void addNodoUtente(Utente** radUtente, char* nome, char* password) {
     if (!(*radUtente)) { // se radUtente è vuoto creo il nodo e lo imposto come radUtente
         Utente* aux = (Utente*)malloc(sizeof(Utente));
         strcpy(aux->nomeUtente, nome);
-        aux->pswd = password;
+        strcpy(aux->pswd, password);
         aux->dx = NULL;
         aux->sx = NULL;
         aux->prenotazioniUtente = NULL;
@@ -84,6 +83,22 @@ int ricercaUtente(Utente* radUtente, char* nome) {
     return trovato;
 }
 
+//funzione di controllo correttezza della password, restituzione booleano
+int controlloPassw(Utente* radUtente, char* nome, char* password) {
+    int corretto = 0;
+    if (radUtente) {
+        if (strcmp(radUtente->nomeUtente, nome) == 0) {
+            if (strcmp(radUtente->pswd, password) == 0)
+                corretto = 1;
+        }
+        else if (strcmp(radUtente->nomeUtente, nome) < 0)
+            corretto = ricercaUtente(radUtente->dx, nome);
+        else if (strcmp(radUtente->nomeUtente, nome) > 0)
+            corretto = ricercaUtente(radUtente->sx, nome);
+    }
+    return corretto;
+}
+
 //funzione di ricerca utente, con riferimento all'utente
 Utente* referenceUtente(Utente* radUtente, char* nome) {
     Utente* ref = NULL;
@@ -103,12 +118,21 @@ Utente* referenceUtente(Utente* radUtente, char* nome) {
 //funzione visita in Preordine ABR utenti
 void visitaInPreOrdineUtenti(Utente* radUtente) {
     if (radUtente) {
-        printf("|%s| ",radUtente->nomeUtente);
+        printf("Nome utente: %s\n", radUtente->nomeUtente);
         visitaInPreOrdineUtenti(radUtente->sx);
         visitaInPreOrdineUtenti(radUtente->dx);
     }
 }
 
+//funzione che cancella totalmente l'ABR utenti
+void eliminaABR(Utente* radUtente)  {
+    if (radUtente != NULL)
+        {
+            eliminaABR(radUtente->sx);
+            eliminaABR(radUtente->dx);
+            free(radUtente);
+        }
+}
 //
 ////funzione per l'aggiunta di un nodo Prenotazione
 //prenotazione* AddNodoPrenotazioneToUser(prenotazione *head/*, dati da inserire*/) {
