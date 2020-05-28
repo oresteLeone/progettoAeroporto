@@ -27,8 +27,17 @@ int main() {
 					printf("\nStringa inserita: %s lunghezza:%d ", string, strlen(string));
 					break;
 				case '2':
-					printf("Salve, per registrarsi inserisca un username:\n");
-					scanf("%s", user);
+					do {
+						printf("Salve, per registrarsi inserisca un username:\n");
+						scanf("%s", user);
+						flag = ricercaUtente(radUtente, user);
+						if (flag == 1)
+							printf("Nome utente non disponibile. Riprovi:\n");
+						else
+							printf("Ok! Ora inserisca una password:\n");
+					} while (flag != 0);
+					scanf("%s", passwd);
+					printf("Perfetto! Registrazione completata. Sta per essere reindirizzato alla schermata principale...\n");
 
 					break;
 				case '0':
