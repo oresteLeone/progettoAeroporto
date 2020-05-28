@@ -12,6 +12,7 @@ int main() {
 	int quit = 0;
 	
 	do {
+			printf("\nInserisca '1' per il Login\nInserisca '2' per Registrarsi\nInserisca '0' per Chiudere\n ");
 			richiesta = catchRequest();
 			
 			switch (richiesta) {

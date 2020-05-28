@@ -8,7 +8,7 @@ char catchRequest()
     char richiesta, buf[maxstring];
 
     while(1){
-        printf("\nInserisca '1' per il Login\nInserisca '2' per Registrarsi\nInserisca '0' per Chiudere\n ");
+        
         printf("\nCosa vuole fare?: ");
         fgets(buf, maxstring, stdin);
 
