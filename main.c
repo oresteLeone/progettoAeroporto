@@ -15,6 +15,7 @@ int main() {
 	
 	do {
 			printf("\nInserisca '1' per il Login\nInserisca '2' per Registrarsi\nInserisca '0' per Chiudere\n ");
+
 			richiesta = catchRequest();
 			user = (char*)malloc(sizeof(char) * 20);
 			passwd = (char*)malloc(sizeof(char) * 20);

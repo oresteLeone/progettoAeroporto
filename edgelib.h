@@ -11,4 +11,6 @@ typedef struct edgeType {
     struct edgeType* next;  //nodo successivo
 } edge;
 
+void addEdge(Graph G, int source, int target, int peso);
+void removeEdge(Graph G, int source, int target);
 #endif
