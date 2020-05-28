@@ -15,13 +15,13 @@ int main() {
 			richiesta = catchRequest();
 			
 			switch (richiesta) {
-				case '0':
+				case '1':
 					printf("\nLogin...\n");
 					break;
-				case '1':
+				case '2':
 					printf("\nRegistrazione...\n");
 					break;
-				case '2':
+				case '0':
 					printf("\nChiusura in corso...\n");
 					quit = 1;
 					break;
