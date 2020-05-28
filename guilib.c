@@ -74,7 +74,7 @@ void menùAdmin(Utente* radUtente) {
             printf("\nRimozione di una tratta\n");
             break;
         case '5':
-            printf("\nUtenti Registrati nel sistema:\n\n");
+            printf("\nUtenti registrati nel sistema:\n\n");
             visitaInPreOrdineUtenti(radUtente);
             break;
         case '0':

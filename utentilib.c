@@ -87,13 +87,14 @@ int ricercaUtente(Utente* radUtente, char* nome) {
 int controlloPassw(Utente* radUtente, char* nome, char* password) {
     int corretto = 0;
     if (radUtente) {
-        if (strcmp(radUtente->nomeUtente, nome) == 0)
+        if (strcmp(radUtente->nomeUtente, nome) == 0) {
             if (strcmp(radUtente->pswd, password) == 0)
                 corretto = 1;
-            else if (strcmp(radUtente->nomeUtente, nome) < 0)
-                corretto = ricercaUtente(radUtente->dx, nome);
-            else if (strcmp(radUtente->nomeUtente, nome) > 0)
-                corretto = ricercaUtente(radUtente->sx, nome);
+        }
+        else if (strcmp(radUtente->nomeUtente, nome) < 0)
+            corretto = ricercaUtente(radUtente->dx, nome);
+        else if (strcmp(radUtente->nomeUtente, nome) > 0)
+            corretto = ricercaUtente(radUtente->sx, nome);
     }
     return corretto;
 }
@@ -118,7 +119,6 @@ Utente* referenceUtente(Utente* radUtente, char* nome) {
 void visitaInPreOrdineUtenti(Utente* radUtente) {
     if (radUtente) {
         printf("Nome utente: %s\n", radUtente->nomeUtente);
-        printf("Passw: %s\n", radUtente->pswd);
         visitaInPreOrdineUtenti(radUtente->sx);
         visitaInPreOrdineUtenti(radUtente->dx);
     }
