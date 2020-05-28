@@ -24,7 +24,7 @@ void addNode(Graph* G);
 void removeNode(Graph* G, int node_to_remove);
 
 //aggiunge arco da source a target
-void addEdge(Graph* G, int source, int target);
+void addEdge(Graph* G, int source, int target, int eco, int dist);
 
 //rimuove arco da source a target
 edge* removeEdge(Graph* G, int source, int target);

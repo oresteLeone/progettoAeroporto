@@ -80,12 +80,12 @@ void removeNode(Graph* G, int node_to_remove) {
 }
 
 //aggiunge arco da source a target
-void addEdge(Graph* G, int source, int target) {
+void addEdge(Graph* G, int source, int target, int eco, int dist) {
 	assert(G != NULL);
 	assert(source < G->nv);
 	assert(target < G->nv);
 	if (source != target) {
-		G->adj[source] = appendNodeList(G->adj[source], target);
+		G->adj[source] = appendNodeList(G->adj[source], target, eco, dist);
 	}
 
 }
