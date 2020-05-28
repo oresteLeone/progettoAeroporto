@@ -89,7 +89,7 @@ int controlloPassw(Utente* radUtente, char* nome, char* password) {
     if (radUtente) {
         if (strcmp(radUtente->nomeUtente, nome) == 0)
             if (strcmp(radUtente->pswd, password) == 0)
-                return 1;
+                corretto = 1;
             else if (strcmp(radUtente->nomeUtente, nome) < 0)
                 corretto = ricercaUtente(radUtente->dx, nome);
             else if (strcmp(radUtente->nomeUtente, nome) > 0)
@@ -117,7 +117,8 @@ Utente* referenceUtente(Utente* radUtente, char* nome) {
 //funzione visita in Preordine ABR utenti
 void visitaInPreOrdineUtenti(Utente* radUtente) {
     if (radUtente) {
-        printf("|%s| ", radUtente->nomeUtente);
+        printf("Nome utente: %s\n", radUtente->nomeUtente);
+        printf("Passw: %s\n", radUtente->pswd);
         visitaInPreOrdineUtenti(radUtente->sx);
         visitaInPreOrdineUtenti(radUtente->dx);
     }

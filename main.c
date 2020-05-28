@@ -42,7 +42,7 @@ int main() {
 					}
 
 					if (strcmp(nomeUtente, "_System") == 0)
-						menùAdmin();
+						menùAdmin(radUtente);
 					else
 						menùUtente();
 				}
@@ -60,6 +60,9 @@ int main() {
 						printf("\nOk! Ora inserisca una password: ");
 				} while (flag != 0);
 				strcpy(passw, getString());
+
+				addNodoUtente(&radUtente, nomeUtente, passw);
+
 				printf("\nPerfetto! Registrazione completata. Sta per essere reindirizzato alla schermata principale...\n");
 
 				break;

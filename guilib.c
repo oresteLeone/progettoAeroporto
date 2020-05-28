@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "guilib.h"
+#include "utentilib.h"
 
 //funzione per ottenere le richieste di un singolo carattere in input
 char catchRequest()
@@ -44,7 +45,7 @@ char* getString() {
 }
 
 //menù dell'admin
-void menùAdmin() {
+void menùAdmin(Utente* radUtente) {
     char richiesta;
     int quit = 0;
 
@@ -53,7 +54,8 @@ void menùAdmin() {
     while (1)
     {
         printf("\nInserisca '1' per aggiungere una destinazione\nInserisca '2' per aggiungere una tratta\n");
-        printf("Inserisca '3' per rimuovere una destinazione\nInserisca '4' per rimuovere una tratta\nInserisca '0' per il Logout\n");
+        printf("Inserisca '3' per rimuovere una destinazione\nInserisca '4' per rimuovere una tratta\n");
+        printf("Inserisca '5' per visualizzare gli utenti registrati nel sistema\nInserisca '0' per il Logout\n");
 
         richiesta = catchRequest();
 
@@ -70,6 +72,10 @@ void menùAdmin() {
             break;
         case '4':
             printf("\nRimozione di una tratta\n");
+            break;
+        case '5':
+            printf("\nUtenti Registrati nel sistema:\n\n");
+            visitaInPreOrdineUtenti(radUtente);
             break;
         case '0':
             printf("\nLogout in corso...\n");
