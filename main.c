@@ -10,16 +10,22 @@ int main() {
 	
 	char richiesta;
 	int quit = 0;
+	char* user, passwd; 
+	int flag = 0;
 	
 	do {
 			richiesta = catchRequest();
-			
+			user = (char*)malloc(sizeof(char) * 20);
+			passwd = (char*)malloc(sizeof(char) * 20);
+
 			switch (richiesta) {
 				case '1':
 					printf("\nLogin...\n");
 					break;
 				case '2':
-					printf("\nRegistrazione...\n");
+					printf("Salve, per registrarsi inserisca un username:\n");
+					scanf("%s", user);
+
 					break;
 				case '0':
 					printf("\nChiusura in corso...\n");
