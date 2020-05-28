@@ -123,6 +123,15 @@ void visitaInPreOrdineUtenti(Utente* radUtente) {
     }
 }
 
+//funzione che cancella totalmente l'ABR utenti
+void eliminaABR(Utente* radUtente)  {
+    if (radUtente != NULL)
+        {
+            eliminaABR(radUtente->sx);
+            eliminaABR(radUtente->dx);
+            free(radUtente);
+        }
+}
 //
 ////funzione per l'aggiunta di un nodo Prenotazione
 //prenotazione* AddNodoPrenotazioneToUser(prenotazione *head/*, dati da inserire*/) {

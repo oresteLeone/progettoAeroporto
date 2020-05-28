@@ -12,6 +12,8 @@ int main() {
 	int quit = 0, flag = 0;
 	Utente* radUtente = NULL;
 
+	addNodoUtente(&radUtente, "_System", "admin");
+
 	do 
 	{
 		printf("\nInserisca '1' per il Login\nInserisca '2' per Registrarsi\nInserisca '0' per Chiudere\n ");
@@ -71,5 +73,7 @@ int main() {
 		}
 	} while (quit != 1);
 
+	eliminaABR(radUtente);
+	radUtente = NULL;
 	return 0;
 }

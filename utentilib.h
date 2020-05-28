@@ -35,6 +35,9 @@ Utente* referenceUtente(Utente* radUtente, char* nome);
 //funzione visita in Preordine ABR utenti
 void visitaInPreOrdineUtenti(Utente* radUtente);
 
+//funzione che cancella totalmente l'ABR utenti
+void eliminaABR(Utente* radUtente);
+
 ////funzione per l'aggiunta di un nodo Prenotazione
 //prenotazione* AddNodoPrenotazioneToUser(prenotazione* head);
 
