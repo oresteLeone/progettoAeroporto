@@ -43,7 +43,7 @@ void printGraph(Graph G, list* destinazioni) {
 		for (i = 0;i < G->nv;i++) {
 			printf("%d %s -> ", i, ricercaDestinazionePerNodo(destinazioni, i));
 			printList(G->adj[i], destinazioni);
-			printf("\n");
+			printf("\n\n");
 		}
 	}
 }
