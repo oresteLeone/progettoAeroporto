@@ -9,14 +9,14 @@
 #include "graphlib.h"
 
 //inizializzazione grafo
-Graph* initGraph(int n) {
-	Graph* G;
+Graph initGraph(int n) {
+	Graph G;
 	int i;
 	G = (Graph*)malloc(sizeof(Graph));
 	if (G) {
-		G->adj = (edge**)malloc(n * sizeof(edge));
+		G->adj = (edge*)malloc(n * sizeof(edge));
 		if (G->adj) {
-			G->nv = n;
+			G->num_nodi = n;
 			for (i = 0;i < n;i++)
 				G->adj[i] = NULL;
 		}
@@ -25,11 +25,11 @@ Graph* initGraph(int n) {
 }
 
 //Free del grafo
-void freeGraph(Graph* G) {
+void freeGraph(Graph G) {
 	if (G != NULL) {
-		if (G->nv > 0) {
+		if (G->num_nodi > 0) {
 			int i = 0;
-			for (i = 0; i < G->nv; i++) {
+			for (i = 0; i < G->num_nodi; i++) {
 				freeList(G->adj[i]);
 			}
 		}
@@ -38,10 +38,10 @@ void freeGraph(Graph* G) {
 }
 
 //stampa del grafo
-void printGraph(Graph* G) {
+void printGraph(Graph G) {
 	if (G != NULL) {
 		int i = 0;
-		for (i = 0;i < G->nv;i++) {
+		for (i = 0;i < G->num_nodi;i++) {
 			printf("%d -> ", i);
 			printList(G->adj[i]);
 			printf("\n");
@@ -50,26 +50,26 @@ void printGraph(Graph* G) {
 }
 
 //aggiungi nodo al grafo
-void addNode(Graph* G) {
+void addNode(Graph G) {
 	if (G != NULL) {
-		edge** old = G->adj;
+		edge* old = G->adj;
 		int i = 0;
-		G->adj = (edge**)malloc((G->nv + 1) * sizeof(edge));
-		for (i = 0;i < G->nv;i++)
+		G->adj = (edge*)malloc((G->num_nodi + 1) * sizeof(edge));
+		for (i = 0;i < G->num_nodi;i++)
 			G->adj[i] = old[i];
-		G->nv += 1;
-		G->adj[G->nv - 1] = NULL;
+		G->num_nodi += 1;
+		G->adj[G->num_nodi - 1] = NULL;
 	}
 }
 
 //rimozione di un nodo dal grafo
-void removeNode(Graph* G, int node_to_remove) {
+void removeNode(Graph G, int node_to_remove) {
 	if (G != NULL) {
 		int i = 0;
 		int x = 0;
-		edge** tmp = G->adj;
-		G->adj = (edge**)calloc(G->nv - 1, sizeof(edge));
-		for (i = 0; i < G->nv; i++) {
+		edge* tmp = G->adj;
+		G->adj = (edge*)calloc(G->num_nodi - 1, sizeof(edge));
+		for (i = 0; i < G->num_nodi; i++) {
 			if (i != node_to_remove) {
 				G->adj[x] = checkListRemoval(tmp[i], node_to_remove);
 				x++;
@@ -79,15 +79,15 @@ void removeNode(Graph* G, int node_to_remove) {
 			}
 		}
 		free(tmp);
-		G->nv -= 1;
+		G->num_nodi -= 1;
 	}
 }
 
 //aggiunge arco da source a target
-void addEdge(Graph* G, int source, int target, int eco, int dist) {
+void addEdge(Graph G, int source, int target, int eco, int dist) {
 	assert(G != NULL);
-	assert(source < G->nv);
-	assert(target < G->nv);
+	assert(source < G->num_nodi);
+	assert(target < G->num_nodi);
 	if (source != target) {
 		G->adj[source] = appendNodeList(G->adj[source], target, eco, dist);
 	}
@@ -95,10 +95,10 @@ void addEdge(Graph* G, int source, int target, int eco, int dist) {
 }
 
 //rimuove arco da source a target
-edge* removeEdge(Graph* G, int source, int target) {
+edge removeEdge(Graph G, int source, int target) {
 	assert(G != NULL);
-	assert(source < G->nv);
-	assert(target < G->nv);
+	assert(source < G->num_nodi);
+	assert(target < G->num_nodi);
 	if (source != target) {
 		G->adj[source] = removeNodeList(G->adj[source], target);
 	}

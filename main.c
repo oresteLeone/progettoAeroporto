@@ -14,6 +14,7 @@ int main() {
 	int quit = 0;
 	char* user, passwd; 
 	int flag = 0;
+	edge E = NULL; 
 	
 	do {
 			printf("\nInserisca '1' per il Login\nInserisca '2' per Registrarsi\nInserisca '0' per Chiudere\n ");
