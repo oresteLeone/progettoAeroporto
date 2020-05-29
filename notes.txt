@@ -209,12 +209,12 @@ MILANO 1->13 BERLINO costo distanza 843
 MILANO 1->17 TOKYO costo distanza 9718
 
 
-ROMA 2->0 NAPOLI costo distanza
-ROMA 2->3 FIRENZE costo distanza
+ROMA 2->0 NAPOLI costo distanza 187
+ROMA 2->3 FIRENZE costo distanza 234
 
-FIRENZE 3->1 MILANO costo distanza
-FIRENZE 3->2 ROMA costo distanza
-FIRENZE 3->4 BOLOGNA costo distanza
+FIRENZE 3->1 MILANO costo distanza 248
+FIRENZE 3->2 ROMA costo distanza 234
+FIRENZE 3->4 BOLOGNA costo distanza 80
 
 BOLOGNA 4->3 FIRENZE
 BOLOGNA 4->5 GENOVA
