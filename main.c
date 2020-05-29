@@ -7,28 +7,33 @@
 #include "guilib.h"
 #include "listlib.h"
 
-
-
-
 int main() {
 	char nomeUtente[maxstring], passw[maxstring];
 	char richiesta;
 	int quit = 0, flag = 0, i=0;
 	Utente* radUtente = NULL;
-	
+	list* destinazioni = NULL;
+
 	addNodoUtente(&radUtente, "_System", "admin");
-	list destinazioni=NULL;
+	
 	Graph G = initGraph(20);
 	for(i=0;i<G->nv;i++)
-		destinazioni = inserisciDestinazione(destinazioni, i, "citta");
+		destinazioni = inserisciDestinazione(destinazioni, i, "citta'");
+
+	printf("\nDestinazioni:\n");
 	stampaLista(destinazioni);
+
+	printf("\nNodo richiesto: %d\n", ricercaDestinazionePerCittà(destinazioni, "citta'"));
+	printf("\nCitta' richiesta: %s\n", ricercaDestinazionePerNodo(destinazioni, 7));
+	
 	addEdge(G, 0, 1, 20, 200);
 	addEdge(G, 1, 2, 40, 400);
 	addEdge(G, 2, 3, 60, 600);
 	addEdge(G, 0, 3, 10, 20);
 	addEdge(G, 3, 1, 5, 30);
-	printGraph(G);
 
+	printf("\nGrafo G:\n");
+	printGraph(G);
 
 	do 
 	{
@@ -94,6 +99,8 @@ int main() {
 	
 	eliminaABR(radUtente);
 	radUtente = NULL;
+	cancellaLista(destinazioni);
+	destinazioni = NULL;
 	return 0;
 }
 
