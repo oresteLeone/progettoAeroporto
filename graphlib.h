@@ -1,12 +1,15 @@
 #ifndef graphlib
 #define graphlib
 #include "edgelib.h" //libreria archi
+#include "listlib.h"
 
 //definizione struttura grafo
 typedef struct graphType {
     int nv;         //numero vertici
     edge** adj;     //lista di adiacenza
 } Graph;
+
+
 
 //inizializzazione grafo
 Graph* initGraph(int n);

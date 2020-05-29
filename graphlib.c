@@ -4,6 +4,7 @@
 #include <assert.h>
 #include "graphlib.h"
 
+
 //inizializzazione grafo
 Graph* initGraph(int n) {
 	Graph* G;
@@ -13,8 +14,9 @@ Graph* initGraph(int n) {
 		G->adj = (edge**)malloc(n * sizeof(edge));
 		if (G->adj) {
 			G->nv = n;
-			for (i = 0;i < n;i++)
+			for (i = 0;i < n;i++) {
 				G->adj[i] = NULL;
+			}
 		}
 	}
 	return G;
