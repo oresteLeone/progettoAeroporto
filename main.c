@@ -60,6 +60,7 @@ int main() {
 			destinazioni = inserisciDestinazione(destinazioni, i, "Nairobi");
 
 	}
+	
 	printf("\nDestinazioni:\n");
 	stampaLista(destinazioni);
 
@@ -103,7 +104,7 @@ int main() {
 					}
 
 					if (strcmp(nomeUtente, "_System") == 0)
-						menuAdmin(radUtente);
+						menuAdmin(radUtente, G, destinazioni);
 					else
 						menuUtente();
 				}

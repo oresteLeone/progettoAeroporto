@@ -2,6 +2,14 @@
 #include <stdlib.h>
 #include <string.h>
 #include "guilib.h"
+//Pulisce l'output
+void clrscr() {
+    #ifdef _WIN32
+        system("cls");
+    #else
+        system("clear");
+    #endif // _WIN32
+}
 
 //funzione per ottenere le richieste di un singolo carattere in input
 char catchRequest()
@@ -44,17 +52,18 @@ char* getString() {
 }
 
 //menù dell'admin
-void menuAdmin(Utente* radUtente) {
+void menuAdmin(Utente* radUtente, Graph G, list* destinazioni) {
     char richiesta;
     int quit = 0;
 
+    clrscr();
     printf("\nMenu' Admin:\n");
 
     while (1)
     {
         printf("\nInserisca '1' per aggiungere una destinazione\nInserisca '2' per aggiungere una tratta\n");
         printf("Inserisca '3' per rimuovere una destinazione\nInserisca '4' per rimuovere una tratta\n");
-        printf("Inserisca '5' per visualizzare gli utenti registrati nel sistema\nInserisca '0' per il Logout\n");
+        printf("Inserisca '5' per visualizzare gli utenti registrati nel sistema\nInserisca '6' per visualizzare i voli disponibili\nInserisca '0' per il Logout\n");
 
         richiesta = catchRequest();
 
@@ -76,9 +85,15 @@ void menuAdmin(Utente* radUtente) {
             printf("\nUtenti registrati nel sistema:\n\n");
             visitaInPreOrdineUtenti(radUtente);
             break;
+        case '6':
+            printf("\nStampa Voli:\n\n");
+            printGraph(G, destinazioni);
+            break;
         case '0':
             printf("\nLogout in corso...\n");
             quit = 1;
+            clrscr();
+            printf("Logout effettuato!\n");
             break;
         default:
             printf("\nRichiesta non valida\n");
@@ -95,6 +110,7 @@ void menuUtente() {
     char richiesta;
     int quit = 0;
 
+    clrscr();
     printf("\nMenu' Utente:\n");
 
     while (1)
@@ -115,6 +131,8 @@ void menuUtente() {
         case '0':
             printf("\nLogout in corso...\n");
             quit = 1;
+            clrscr();
+            printf("Logout effettuato!\n");
             break;
         default:
             printf("\nRichiesta non valida\n");
