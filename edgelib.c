@@ -1,9 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+<<<<<< < HEAD
 #include "edgelib.h"
 
-edge initNodeList(int info, int pesoEco, int pesoDis) {
+    edge initNodeList(int info, int pesoEco, int pesoDis) {
     edge E = malloc(sizeof(struct edgeType));
     E->key = info;
     E->pesoEconomy = pesoEco;
@@ -102,14 +103,3 @@ void freeList(edge E) {
     if (E != NULL) {
         freeList(E->next);
         free(E);
-    }
-}
-
-
-void printList(edge E) {
-    if (E != NULL) {
-        printf(" %d(%d)(%d) ", E->key, E->pesoEconomy, E->pesoDistanza);
-        printList(E->next);
-    }
-}
-
