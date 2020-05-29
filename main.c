@@ -14,6 +14,14 @@ int main() {
 	Utente* radUtente = NULL;
 	
 	addNodoUtente(&radUtente, "_System", "admin");
+	Graph* G = initGraph(20);
+	addEdge(G, 0, 1, 20, 200);
+	addEdge(G, 1, 2, 40, 400);
+	addEdge(G, 2, 3, 60, 600);
+	addEdge(G, 0, 3, 10, 20);
+	addEdge(G, 3, 1, 5, 30);
+	printGraph(G);
+
 
 	do 
 	{
