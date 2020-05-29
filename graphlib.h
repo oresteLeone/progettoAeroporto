@@ -1,7 +1,8 @@
 #ifndef graphlib
 #define graphlib
 #include "edgelib.h" //libreria archi
-#include "listlib.h"
+
+
 
 //definizione struttura grafo
 struct graphType {
@@ -18,7 +19,7 @@ Graph initGraph(int n);
 void freeGraph(Graph G);
 
 //stampa del grafo
-void printGraph(Graph G);
+void printGraph(Graph G, list* destinazioni);
 
 //aggiungi nodo al grafo
 void addNode(Graph G);

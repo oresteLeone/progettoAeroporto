@@ -5,6 +5,7 @@
 #include "graphlib.h"
 
 
+
 //inizializzazione grafo
 Graph initGraph(int n) {
 	Graph G;
@@ -36,12 +37,12 @@ void freeGraph(Graph G) {
 }
 
 //stampa del grafo
-void printGraph(Graph G) {
+void printGraph(Graph G, list* destinazioni) {
 	if (G != NULL) {
 		int i = 0;
 		for (i = 0;i < G->nv;i++) {
-			printf("%d -> ", i);
-			printList(G->adj[i]);
+			printf("%d %s -> ", i, ricercaDestinazionePerNodo(destinazioni, i));
+			printList(G->adj[i], destinazioni);
 			printf("\n");
 		}
 	}

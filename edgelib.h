@@ -1,6 +1,7 @@
 #ifndef edgelib
 #define edgelib
 #include "definers.h" //libreria delle costanti definite
+#include "listlib.h"
 
 //definizione struttura degli archi
 struct edgeType {
@@ -12,7 +13,7 @@ struct edgeType {
 typedef struct edgeType* edge;
 
 
-void printList(edge L);
+void printList(edge L, list* destinazioni);
 
 
 edge checkListRemoval(edge L, int node_to_remove);

@@ -5,10 +5,10 @@
 #include <time.h>
 #include "edgelib.h"
 
-void printList(edge L) {
+void printList(edge L, list* destinazioni) {
     if (L != NULL) {
-        printf("%d costo:%d distanza:%d -> ", L->key, L->pesoEconomy, L->pesoDistanza);
-        printList(L->next);
+        printf("%d %s costo:%d distanza:%d -> ", L->key, ricercaDestinazionePerNodo(destinazioni, L->key),L->pesoEconomy, L->pesoDistanza);
+        printList(L->next,destinazioni);
     }
 }
 
