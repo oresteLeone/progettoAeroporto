@@ -11,6 +11,9 @@ typedef struct listType {
 //funzione che inserisce una nuova destinazione nella lista
 list* inserisciDestinazione(list* destinazioni, int n, char* città);
 
+//funzione che inizializza la lista
+list* initDestinazioni(list* destinazioni, int nv);
+
 //funzione che rimuove una destinazione dalla lista
 list* decrementaNodi(list* destinazioni);
 list* eliminaDestinazione(list* destinazioni, char* città);

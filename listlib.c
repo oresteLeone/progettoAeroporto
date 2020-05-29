@@ -18,6 +18,54 @@ list* inserisciDestinazione(list* destinazioni, int n, char* città) {
     return destinazioni;
 }
 
+//funzione che inizializza la lista
+list* initDestinazioni(list* destinazioni, int nv) {
+    for (int i = 0; i < nv; i++) {
+        if (i == 0)
+            destinazioni = inserisciDestinazione(destinazioni, i, "Napoli");
+        else if (i == 1)
+            destinazioni = inserisciDestinazione(destinazioni, i, "Milano");
+        else if (i == 2)
+            destinazioni = inserisciDestinazione(destinazioni, i, "Roma");
+        else if (i == 3)
+            destinazioni = inserisciDestinazione(destinazioni, i, "Firenze");
+        else if (i == 4)
+            destinazioni = inserisciDestinazione(destinazioni, i, "Bologna");
+        else if (i == 5)
+            destinazioni = inserisciDestinazione(destinazioni, i, "Genova");
+        else if (i == 6)
+            destinazioni = inserisciDestinazione(destinazioni, i, "Brindisi");
+        else if (i == 7)
+            destinazioni = inserisciDestinazione(destinazioni, i, "Bari");
+        else if (i == 8)
+            destinazioni = inserisciDestinazione(destinazioni, i, "Torino");
+        else if (i == 9)
+            destinazioni = inserisciDestinazione(destinazioni, i, "Londra");
+        else if (i == 10)
+            destinazioni = inserisciDestinazione(destinazioni, i, "Venezia");
+        else if (i == 11)
+            destinazioni = inserisciDestinazione(destinazioni, i, "Bruxelles");
+        else if (i == 12)
+            destinazioni = inserisciDestinazione(destinazioni, i, "Parigi");
+        else if (i == 13)
+            destinazioni = inserisciDestinazione(destinazioni, i, "Berlino");
+        else if (i == 14)
+            destinazioni = inserisciDestinazione(destinazioni, i, "Barcellona");
+        else if (i == 15)
+            destinazioni = inserisciDestinazione(destinazioni, i, "Valencia");
+        else if (i == 16)
+            destinazioni = inserisciDestinazione(destinazioni, i, "Lisbona");
+        else if (i == 17)
+            destinazioni = inserisciDestinazione(destinazioni, i, "Tokyo");
+        else if (i == 18)
+            destinazioni = inserisciDestinazione(destinazioni, i, "Rio");
+        else if (i == 19)
+            destinazioni = inserisciDestinazione(destinazioni, i, "Nairobi");
+    }
+
+    return destinazioni;
+}
+
 //funzione che rimuove una destinazione dalla lista
 list* decrementaNodi(list* destinazioni) {
     if (destinazioni != NULL) {
