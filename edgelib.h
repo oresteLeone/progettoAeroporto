@@ -24,4 +24,30 @@ void printList(edge E);
 
 
 
+
+void printList(edge* L);
+
+
+edge* checkListRemoval(edge* L, int node_to_remove);
+
+
+edge* initNodeList(int info);
+
+
+edge* randomList(int index, int mod);
+
+
+edge* appendNodeList(edge* L, int target, int eco, int dist);
+
+
+edge* addNodeHead(edge* L, int target);
+
+
+edge* removeNodeList(edge* L, int target);
+
+
+void freeList(edge* L);
+
+
+int DimLista(edge* L);
 #endif
