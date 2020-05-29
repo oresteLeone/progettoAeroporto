@@ -2,7 +2,6 @@
 #include <stdlib.h>
 #include <string.h>
 #include "guilib.h"
-#include "utentilib.h"
 
 //funzione per ottenere le richieste di un singolo carattere in input
 char catchRequest()
@@ -45,7 +44,7 @@ char* getString() {
 }
 
 //menù dell'admin
-void menùAdmin(Utente* radUtente) {
+void menuAdmin(Utente* radUtente) {
     char richiesta;
     int quit = 0;
 
@@ -92,7 +91,7 @@ void menùAdmin(Utente* radUtente) {
 }
 
 //menù dell'utente
-void menùUtente() {
+void menuUtente() {
     char richiesta;
     int quit = 0;
 

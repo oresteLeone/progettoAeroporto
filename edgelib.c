@@ -5,7 +5,7 @@
 #include <time.h>
 #include "edgelib.h"
 
-void printList(edge* L) {
+void printList(edge L) {
     if (L != NULL) {
         printf("%d costo:%d distanza:%d -> ", L->key, L->pesoEconomy, L->pesoDistanza);
         printList(L->next);
@@ -13,11 +13,11 @@ void printList(edge* L) {
 }
 
 
-edge* checkListRemoval(edge* L, int node_to_remove) {
+edge checkListRemoval(edge L, int node_to_remove) {
     if (L != NULL) {
         L->next = checkListRemoval(L->next, node_to_remove);
         if (L->key == node_to_remove) {
-            edge* tmp = L->next;
+            edge tmp = L->next;
             free(L);
             return tmp;
         }
@@ -28,8 +28,8 @@ edge* checkListRemoval(edge* L, int node_to_remove) {
     return L;
 }
 
-edge* initNodeList(int info, int eco, int dist) {
-    edge* L = (edge*)malloc(sizeof(edge));
+edge initNodeList(int info, int eco, int dist) {
+    edge L = (edge)malloc(sizeof(struct edgeType));
     L->key = info;
     L->pesoEconomy = eco;
     L->pesoDistanza = dist;
@@ -38,8 +38,8 @@ edge* initNodeList(int info, int eco, int dist) {
 }
 
 
-edge* randomList(int index, int mod) {
-    edge* L = NULL;
+edge randomList(int index, int mod) {
+    edge L = NULL;
     int i = 0;
     for (i = 0; i < index; i++) {
         L = appendNodeList(L, rand() % mod, rand() % mod, rand() % mod);
@@ -48,7 +48,7 @@ edge* randomList(int index, int mod) {
 }
 
 
-edge* appendNodeList(edge* L, int target, int eco, int dist) {
+edge appendNodeList(edge L, int target, int eco, int dist) {
     if (L != NULL) {
         if (L->key != target) {
             L->next = appendNodeList(L->next, target, eco, dist);
@@ -61,9 +61,9 @@ edge* appendNodeList(edge* L, int target, int eco, int dist) {
 }
 
 
-edge* addNodeHead(edge* L, int target, int eco, int dist) {
+edge addNodeHead(edge L, int target, int eco, int dist) {
     if (L != NULL) {
-        edge* G = (edge*)malloc(sizeof(edge));
+        edge G = (edge)malloc(sizeof(struct edgeType));
         G->key = target;
         L->pesoEconomy = eco;
         L->pesoDistanza = dist;
@@ -74,10 +74,10 @@ edge* addNodeHead(edge* L, int target, int eco, int dist) {
 }
 
 
-edge* removeNodeList(edge* L, int target) {
+edge removeNodeList(edge L, int target) {
     if (L != NULL) {
         if (L->key == target) {
-            edge* tmp = L->next;
+            edge tmp = L->next;
             free(L);
             return tmp;
         }
@@ -87,7 +87,7 @@ edge* removeNodeList(edge* L, int target) {
 }
 
 
-void freeList(edge* L) {
+void freeList(edge L) {
     if (L != NULL) {
         freeList(L->next);
         free(L);
@@ -95,7 +95,7 @@ void freeList(edge* L) {
 }
 
 
-int DimLista(edge* L) {
+int DimLista(edge L) {
     if (L == NULL)
         return 0;
     return 1 + DimLista(L->next);

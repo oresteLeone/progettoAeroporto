@@ -17,8 +17,8 @@ int main() {
 	Utente* radUtente = NULL;
 	
 	addNodoUtente(&radUtente, "_System", "admin");
-	list* destinazioni=NULL;
-	Graph* G = initGraph(20);
+	list destinazioni=NULL;
+	Graph G = initGraph(20);
 	for(i=0;i<G->nv;i++)
 		destinazioni = inserisciDestinazione(destinazioni, i, "citta");
 	stampaLista(destinazioni);
@@ -58,9 +58,9 @@ int main() {
 					}
 
 					if (strcmp(nomeUtente, "_System") == 0)
-						menùAdmin(radUtente);
+						menuAdmin(radUtente);
 					else
-						menùUtente();
+						menuUtente();
 				}
 
 				break;

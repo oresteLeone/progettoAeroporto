@@ -3,37 +3,38 @@
 #include "definers.h" //libreria delle costanti definite
 
 //definizione struttura degli archi
-typedef struct edgeType {
+struct edgeType {
     int key;                //chiave numerica del nodo
     int pesoEconomy;        //peso arco costo economico
     int pesoDistanza;       //peso arco costo distanza
     struct edgeType* next;  //nodo successivo
-} edge;
+};
+typedef struct edgeType* edge;
 
 
-void printList(edge* L);
+void printList(edge L);
 
 
-edge* checkListRemoval(edge* L, int node_to_remove);
+edge checkListRemoval(edge L, int node_to_remove);
 
 
-edge* initNodeList(int info);
+edge initNodeList(int info, int eco, int dist);
 
 
-edge* randomList(int index, int mod);
+edge randomList(int index, int mod);
 
 
-edge* appendNodeList(edge* L, int target, int eco, int dist);
+edge appendNodeList(edge L, int target, int eco, int dist);
 
 
-edge* addNodeHead(edge* L, int target);
+edge addNodeHead(edge L, int target, int eco, int dist);
 
 
-edge* removeNodeList(edge* L, int target);
+edge removeNodeList(edge L, int target);
 
 
-void freeList(edge* L);
+void freeList(edge L);
 
 
-int DimLista(edge* L);
+int DimLista(edge L);
 #endif

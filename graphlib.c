@@ -6,12 +6,12 @@
 
 
 //inizializzazione grafo
-Graph* initGraph(int n) {
-	Graph* G;
+Graph initGraph(int n) {
+	Graph G;
 	int i;
-	G = (Graph*)malloc(sizeof(Graph));
+	G = (Graph)malloc(sizeof(struct graphType));
 	if (G) {
-		G->adj = (edge**)malloc(n * sizeof(edge));
+		G->adj = (edge*)malloc(n * sizeof(struct edgeType));
 		if (G->adj) {
 			G->nv = n;
 			for (i = 0;i < n;i++) {
@@ -23,7 +23,7 @@ Graph* initGraph(int n) {
 }
 
 //Free del grafo
-void freeGraph(Graph* G) {
+void freeGraph(Graph G) {
 	if (G != NULL) {
 		if (G->nv > 0) {
 			int i = 0;
@@ -36,7 +36,7 @@ void freeGraph(Graph* G) {
 }
 
 //stampa del grafo
-void printGraph(Graph* G) {
+void printGraph(Graph G) {
 	if (G != NULL) {
 		int i = 0;
 		for (i = 0;i < G->nv;i++) {
@@ -48,11 +48,11 @@ void printGraph(Graph* G) {
 }
 
 //aggiungi nodo al grafo
-void addNode(Graph* G) {
+void addNode(Graph G) {
 	if (G != NULL) {
-		edge** old = G->adj;
+		edge* old = G->adj;
 		int i = 0;
-		G->adj = (edge**)malloc((G->nv + 1) * sizeof(edge));
+		G->adj = (edge*)malloc((G->nv + 1) * sizeof(struct edgeType));
 		for (i = 0;i < G->nv;i++)
 			G->adj[i] = old[i];
 		G->nv += 1;
@@ -61,12 +61,12 @@ void addNode(Graph* G) {
 }
 
 //rimozione di un nodo dal grafo
-void removeNode(Graph* G, int node_to_remove) {
+void removeNode(Graph G, int node_to_remove) {
 	if (G != NULL) {
 		int i = 0;
 		int x = 0;
-		edge** tmp = G->adj;
-		G->adj = (edge**)calloc(G->nv - 1, sizeof(edge));
+		edge* tmp = G->adj;
+		G->adj = (edge*)calloc(G->nv - 1, sizeof(struct edgeType));
 		for (i = 0; i < G->nv; i++) {
 			if (i != node_to_remove) {
 				G->adj[x] = checkListRemoval(tmp[i], node_to_remove);
@@ -82,7 +82,7 @@ void removeNode(Graph* G, int node_to_remove) {
 }
 
 //aggiunge arco da source a target
-void addEdge(Graph* G, int source, int target, int eco, int dist) {
+void addEdge(Graph G, int source, int target, int eco, int dist) {
 	assert(G != NULL);
 	assert(source < G->nv);
 	assert(target < G->nv);
@@ -93,7 +93,7 @@ void addEdge(Graph* G, int source, int target, int eco, int dist) {
 }
 
 //rimuove arco da source a target
-edge* removeEdge(Graph* G, int source, int target) {
+edge removeEdge(Graph G, int source, int target) {
 	assert(G != NULL);
 	assert(source < G->nv);
 	assert(target < G->nv);
