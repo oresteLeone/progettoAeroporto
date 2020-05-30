@@ -166,7 +166,7 @@ void menuAdmin(Utente* radUtente, Graph G, list* destinazioni) {
 }
 
 //menù dell'utente
-void menuUtente(list* destinazioni) {
+void menuUtente(Utente* User, Graph G, list* destinazioni) {
     char richiesta;
     int quit = 0;
 
@@ -187,6 +187,8 @@ void menuUtente(list* destinazioni) {
             break;
         case '2':
             printf("\nPrenotazione:\n");
+            catchPrenotazione(User, G, destinazioni);
+
             break;
         case '3':
             printf("\nLista citta':\n");
@@ -206,4 +208,62 @@ void menuUtente(list* destinazioni) {
         if (quit == 1)
             break;
     }
+}
+
+void catchPrenotazione(Utente* User, Graph G, list* destinazioni) {
+    unsigned int mode,tratt;
+    char partenza1[maxstring], arrivo1[maxstring];
+    int indexP, indexA;
+    int* padre = (int*)malloc(sizeof(int) * G->nv);
+    int* d = (int*)malloc(sizeof(int) * G->nv);
+    printf("\nInserisca '1' per inserire Partenza e Destinazione\nInserisca '2' per inserire solo Partenza\nInserisca '0' per annullare\n");
+    mode = catchRequest();
+    switch (mode)
+    {
+    case '1':
+        printf("inserire citta' di partenza: ");
+        strcpy(partenza1, getString());
+        indexP = ricercaDestinazionePerCittà(destinazioni, partenza1);
+        if (indexP == -1) {
+            printf("La citta non e' presente!");
+            printf("\nOperazione annullata...\n");
+            break;
+        }
+        printf("inserire citta' di arrivo: ");
+        strcpy(arrivo1, getString());
+        indexA = ricercaDestinazionePerCittà(destinazioni, arrivo1);
+        if (indexA == -1) {
+            printf("La citta non e' presente!");
+            printf("\nOperazione annullata...\n");
+            break;
+        }
+
+        printf("\nInserisca '1' per la tratta piu' economica\nInserisca '2' per la tratta più breve\n");
+        do{ 
+            tratt = catchRequest();
+            if (tratt != 1 || tratt != 2)
+                printf("input non valido!");
+        } while (tratt != 1 || tratt != 2);
+        if (tratt == 1) {
+            Dijkstra_Economy(G, indexP, padre, d);
+            prenotazione* tmp = creaPrenotazioneEconomy(padre, indexP, indexA, destinazioni, d[indexA], G);
+            //DA CONTINUARE
+        }
+        else {
+
+        }
+            
+
+
+        break;
+    case '2':
+        break;
+    case '0':
+        printf("\nOperazione annullata...\n");
+        break;
+    default:
+        printf("\nRichiesta non valida\n");
+        break;
+    }
+
 }

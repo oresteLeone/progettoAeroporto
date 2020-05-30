@@ -3,6 +3,7 @@
 #include "definers.h"
 #include "utentilib.h"
 #include "graphlib.h"
+#include "Dijkstra.h"
 
 //Pulisce l'output
 void clrscr();
@@ -17,6 +18,8 @@ char* getString();
 void menuAdmin(Utente* radUtente, Graph G, list* destinazioni);
 
 //menù dell'utente
-void menuUtente();
+void menuUtente(Utente* User, Graph G, list* destinazioni);
+
+void catchPrenotazione(Utente* User, Graph G, list* destinazioni);
 
 #endif

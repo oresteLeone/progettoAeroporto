@@ -1,7 +1,5 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "codePriorità.h"
-#include "graphlib.h"
 #include "Dijkstra.h"
 
 /*Strutture Dati Necessarie all'Algoritmo di Dijkstra*/
