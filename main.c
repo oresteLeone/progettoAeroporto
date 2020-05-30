@@ -124,7 +124,7 @@ int main() {
 					if (strcmp(nomeUtente, "_System") == 0)
 						menuAdmin(radUtente, G, destinazioni);
 					else
-						menuUtente();
+						menuUtente(destinazioni);
 				}
 
 				break;

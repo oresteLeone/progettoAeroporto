@@ -120,7 +120,7 @@ char* ricercaDestinazionePerNodo(list* destinazioni, int n) {
 //funzione che stampa gli elementi della lista
 void stampaLista(list* destinazioni) {
     if (destinazioni != NULL) {
-        printf("\nNodo associato: %d ", destinazioni->n);
+        printf("\nNodo: %d ", destinazioni->n);
         printf("Citta': %s\n", destinazioni->città);
         stampaLista(destinazioni->next);
     }

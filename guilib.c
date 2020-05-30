@@ -134,7 +134,7 @@ void menuAdmin(Utente* radUtente, Graph G, list* destinazioni) {
 }
 
 //menù dell'utente
-void menuUtente() {
+void menuUtente(list* destinazioni) {
     char richiesta;
     int quit = 0;
 
@@ -143,8 +143,8 @@ void menuUtente() {
 
     while (1)
     {
-        printf("\nInserisca '1' per visualizzare le sue prenotazioni attive\nInserisca '2' per effettuare una prenotazione\n");
-        printf("Inserisca '0' per il Logout\n");
+        printf("\nInserisca '1' per visualizzare le sue prenotazioni attive\nInserisca '2' per effettuare una prenotazione");
+        printf("\nInserisca '3' per la stampa delle citta'\nInserisca '0' per il Logout\n");
 
         richiesta = catchRequest();
 
@@ -155,6 +155,10 @@ void menuUtente() {
             break;
         case '2':
             printf("\nPrenotazione:\n");
+            break;
+        case '3':
+            printf("\nLista citta':\n");
+            stampaLista(destinazioni);
             break;
         case '0':
             printf("\nLogout in corso...\n");
