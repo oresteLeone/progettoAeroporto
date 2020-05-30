@@ -119,24 +119,23 @@ void menuAdmin(Utente* radUtente, Graph G, list* destinazioni) {
             break;
         case '4':
             printf("\n-Rimozione di una tratta-\n");
-            char partenza[maxstring], arrivo[maxstring];
-            int indexP, indexA;
-            int eco, dist;
+            char partenza2[maxstring], arrivo2[maxstring];
+            int indexP2, indexA2;
             printf("Inserire citta' di partenza: ");
-            strcpy(partenza, getString());
-            indexP = ricercaDestinazionePerCittà(destinazioni, partenza);
-            if (indexP == -1) {
+            strcpy(partenza2, getString());
+            indexP2 = ricercaDestinazionePerCittà(destinazioni, partenza2);
+            if (indexP2 == -1) {
                 printf("La citta non e' presente!\n");
                 break;
             }
             printf("Inserire citta' di arrivo: ");
-            strcpy(arrivo, getString());
-            indexA = ricercaDestinazionePerCittà(destinazioni, arrivo);
-            if (indexA == -1) {
+            strcpy(arrivo2, getString());
+            indexA2 = ricercaDestinazionePerCittà(destinazioni, arrivo2);
+            if (indexA2 == -1) {
                 printf("La citta non e' presente!\n");
                 break;
             }
-            removeEdge(G, partenza, arrivo);
+            removeEdge(G, partenza2, arrivo2);
 
             break;
         case '5':

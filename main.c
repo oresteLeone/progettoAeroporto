@@ -26,8 +26,6 @@ int main() {
 	addEdge(G, 0, 3, 10, 35);
 	addEdge(G, 3, 1, 5, 20);
 
-	printGraph(G, destinazioni);
-	
 	addEdge(G, 0, 1, 10, 187);
 	addEdge(G, 0, 7, 20, 219);
 	addEdge(G, 0, 14, 100, 1016);
