@@ -19,7 +19,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="codePriorità.h" />
     <ClInclude Include="definers.h" />
+    <ClInclude Include="Dijkstra.h" />
     <ClInclude Include="edgelib.h" />
     <ClInclude Include="graphlib.h" />
     <ClInclude Include="guilib.h" />
@@ -31,6 +33,8 @@
     <Text Include="notes.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="codePriorità.c" />
+    <ClCompile Include="Dijkstra.c" />
     <ClCompile Include="edgelib.c" />
     <ClCompile Include="graphlib.c" />
     <ClCompile Include="guilib.c" />
