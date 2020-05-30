@@ -43,7 +43,7 @@ void printGraph(Graph G, list* destinazioni) {
 		for (i = 0;i < G->nv;i++) {
 			printf("%d %s -> ", i, ricercaDestinazionePerNodo(destinazioni, i));
 			printList(G->adj[i], destinazioni);
-			printf("\n");
+			printf("\n\n");
 		}
 	}
 }
@@ -94,12 +94,12 @@ void addEdge(Graph G, int source, int target, int eco, int dist) {
 }
 
 //rimuove arco da source a target
-edge removeEdge(Graph G, int source, int target) {
+void removeEdge(Graph G, int source, int target) {
 	assert(G != NULL);
 	assert(source < G->nv);
 	assert(target < G->nv);
 	if (source != target) {
 		G->adj[source] = removeNodeList(G->adj[source], target);
 	}
-	return G->adj[source];
+	
 }

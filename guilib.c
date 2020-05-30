@@ -71,15 +71,73 @@ void menuAdmin(Utente* radUtente, Graph G, list* destinazioni) {
         {
         case '1':
             printf("\nAggiunta di una destinazione:\n");
+            addNode(G);
+            printf("Inserisca il nome della destinazione: ");
+            char tmpname[maxstring]; 
+            strcpy(tmpname, getString());
+            destinazioni = inserisciDestinazione(destinazioni, G->nv-1, tmpname);
             break;
         case '2':
             printf("\nAggiunta di una tratta:\n");
+            char partenza[maxstring], arrivo[maxstring];
+            int indexP, indexA;
+            int eco, dist;
+            printf("inserire citta' di partenza: ");
+            strcpy(partenza, getString());
+            indexP = ricercaDestinazionePerCittà(destinazioni, partenza);
+            if (indexP == -1) {
+                printf("La citta non e' presente!\n");
+                break;
+            }
+            printf("inserire citta' di arrivo: ");
+            strcpy(arrivo, getString());
+            indexA = ricercaDestinazionePerCittà(destinazioni, arrivo);
+            if (indexA == -1) {
+                printf("La citta non e' presente!\n");
+                break;
+            }
+            printf("Costo Economico: ");
+            scanf("%d", &eco);
+            printf("Costo Distanza: ");
+            scanf("%d", &dist);
+            addEdge(G, indexP, indexA, eco, dist);
+            getchar('\n');
             break;
         case '3':
-            printf("\nRimozione di una destinazione:\n");
+            printf("\n-Rimozione di una destinazione-\n");
+            printf("Inserire citta' da rimuovere: ");
+            char city[maxstring];
+            strcpy(city, getString());
+            int result = ricercaDestinazionePerCittà(destinazioni, city);
+            if (result == -1) {
+                printf("Non è possibile rimuovere la destinazione perche' non esiste.\n");
+                break;
+            }
+            removeNode(G, result);
+            destinazioni = eliminaDestinazione(destinazioni, city);
+
             break;
         case '4':
-            printf("\nRimozione di una tratta\n");
+            printf("\n-Rimozione di una tratta-\n");
+            char partenza[maxstring], arrivo[maxstring];
+            int indexP, indexA;
+            int eco, dist;
+            printf("Inserire citta' di partenza: ");
+            strcpy(partenza, getString());
+            indexP = ricercaDestinazionePerCittà(destinazioni, partenza);
+            if (indexP == -1) {
+                printf("La citta non e' presente!\n");
+                break;
+            }
+            printf("Inserire citta' di arrivo: ");
+            strcpy(arrivo, getString());
+            indexA = ricercaDestinazionePerCittà(destinazioni, arrivo);
+            if (indexA == -1) {
+                printf("La citta non e' presente!\n");
+                break;
+            }
+            removeEdge(G, partenza, arrivo);
+
             break;
         case '5':
             printf("\nUtenti registrati nel sistema:\n\n");
@@ -106,7 +164,7 @@ void menuAdmin(Utente* radUtente, Graph G, list* destinazioni) {
 }
 
 //menù dell'utente
-void menuUtente() {
+void menuUtente(list* destinazioni) {
     char richiesta;
     int quit = 0;
 
@@ -115,8 +173,8 @@ void menuUtente() {
 
     while (1)
     {
-        printf("\nInserisca '1' per visualizzare le sue prenotazioni attive\nInserisca '2' per effettuare una prenotazione\n");
-        printf("Inserisca '0' per il Logout\n");
+        printf("\nInserisca '1' per visualizzare le sue prenotazioni attive\nInserisca '2' per effettuare una prenotazione");
+        printf("\nInserisca '3' per la stampa delle citta'\nInserisca '0' per il Logout\n");
 
         richiesta = catchRequest();
 
@@ -127,6 +185,10 @@ void menuUtente() {
             break;
         case '2':
             printf("\nPrenotazione:\n");
+            break;
+        case '3':
+            printf("\nLista citta':\n");
+            stampaLista(destinazioni);
             break;
         case '0':
             printf("\nLogout in corso...\n");
