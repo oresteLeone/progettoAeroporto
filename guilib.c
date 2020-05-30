@@ -138,7 +138,7 @@ void menuAdmin(Utente* radUtente, Graph G, list* destinazioni) {
                 printf("La citta non e' presente!\n");
                 break;
             }
-            removeEdge(G, partenza2, arrivo2);
+            removeEdge(G, indexP2, indexA2);
 
             break;
         case '5':

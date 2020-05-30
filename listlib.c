@@ -84,7 +84,7 @@ list* eliminaDestinazione(list* destinazioni, char* città) {
             tmp = decrementaNodi(tmp);
             return tmp;
         }
-        destinazioni = eliminaDestinazione(destinazioni->next, città);
+        destinazioni->next = eliminaDestinazione(destinazioni->next, città);
     }
     return destinazioni;
 }
