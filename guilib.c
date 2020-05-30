@@ -113,6 +113,9 @@ void menuAdmin(Utente* radUtente, Graph G, list* destinazioni) {
                 printf("Non è possibile rimuovere la destinazione perche' non esiste.\n");
                 break;
             }
+            else
+                printf("Ok! Destinazione rimossa con successo!\n");
+
             removeNode(G, result);
             destinazioni = eliminaDestinazione(destinazioni, city);
 
