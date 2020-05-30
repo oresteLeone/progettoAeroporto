@@ -14,6 +14,8 @@ typedef struct graphType* Graph;
 
 //inizializzazione grafo
 Graph initGraph(int n);
+//inizializzazione archi
+void initEdge(Graph G);
 
 //Free del grafo
 void freeGraph(Graph G);
