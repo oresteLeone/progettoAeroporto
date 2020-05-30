@@ -71,9 +71,37 @@ void menuAdmin(Utente* radUtente, Graph G, list* destinazioni) {
         {
         case '1':
             printf("\nAggiunta di una destinazione:\n");
+            addNode(G);
+            printf("Inserisca il nome della destinazione: ");
+            char tmpname[maxstring]; 
+            strcpy(tmpname, getString());
+            destinazioni = inserisciDestinazione(destinazioni, G->nv-1, tmpname);
             break;
         case '2':
             printf("\nAggiunta di una tratta:\n");
+            char partenza[maxstring], arrivo[maxstring];
+            int indexP, indexA;
+            int eco, dist;
+            printf("inserire citta' di partenza: ");
+            strcpy(partenza, getString());
+            indexP = ricercaDestinazionePerCittà(destinazioni, partenza);
+            if (indexP == -1) {
+                printf("La citta non e' presente!\n");
+                break;
+            }
+            printf("inserire citta' di arrivo: ");
+            strcpy(arrivo, getString());
+            indexA = ricercaDestinazionePerCittà(destinazioni, arrivo);
+            if (indexA == -1) {
+                printf("La citta non e' presente!\n");
+                break;
+            }
+            printf("Costo Economico: ");
+            scanf("%d", &eco);
+            printf("Costo Distanza: ");
+            scanf("%d", &dist);
+            addEdge(G, indexP, indexA, eco, dist);
+            getchar('\n');
             break;
         case '3':
             printf("\nRimozione di una destinazione:\n");
