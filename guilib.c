@@ -212,7 +212,7 @@ void menuUtente(Utente* User, Graph G, list* destinazioni) {
 }
 
 void catchPrenotazione(Utente* User, Graph G, list* destinazioni) {
-    char mode;
+    char mode,confirm;
     int tratt;
     char partenza1[maxstring], arrivo1[maxstring];
     int indexP, indexA;
@@ -248,23 +248,46 @@ void catchPrenotazione(Utente* User, Graph G, list* destinazioni) {
         } while (tratt != 1 && tratt != 2);
         if (tratt == 1) {
             printf("\nTRATTA ECONOMICA\n");
+            getchar('\n');
             Dijkstra_Economy(G, indexP, padre, d);
             path* patheco = extractPath(padre, indexP, indexA);
             printf("\nIl percorso prevede le seguenti tratte: ");
             printPath(patheco, destinazioni);
             prenotazione* tmp = creaPrenotazioneEconomy(patheco, indexP, indexA, destinazioni, d[indexA], G);
             printPrenotazioni(tmp);
-            if (User->prenotazioniUtente == NULL)
-                User->prenotazioniUtente = tmp;
+            printf("\nInserisca '1' per confermare, '0' per annullare: ");
+            confirm = catchRequest();
+            if (confirm == '1') {
+                User->prenotazioniUtente = addPrenotazione(User->prenotazioniUtente, tmp);
+                printf("Prenotazione Effettuata!\n");
+                
+            }
             else
-                User->prenotazioniUtente->next = tmp;
+                printf("\nOperazione annullata!\n");
             
         }
         else {
-            printf("\nTRATTA BREVE IN ALLESTIMENTO\n");
+            printf("\nTRATTA BREVE \n");
+            getchar('\n');
+            Dijkstra_Distanza(G, indexP, padre, d);
+            path* pathdist = extractPath(padre, indexP, indexA);
+            printf("\nIl percorso prevede le seguenti tratte: ");
+            printPath(pathdist, destinazioni);
+            prenotazione* tmp = creaPrenotazioneDistance(pathdist, indexP, indexA, destinazioni, d[indexA], G);
+            printPrenotazioni(tmp);
+            printf("\nInserisca '1' per confermare, '0' per annullare: ");
+            confirm = catchRequest();
+            if (confirm == '1') {
+                User->prenotazioniUtente=addPrenotazione(User->prenotazioniUtente, tmp);
+                printf("Prenotazione Effettuata!\n");
+                
+            }
+            else
+                printf("\nOperazione annullata!\n");
+                
         }
             
-        getchar('\n');
+        
 
         break;
     case '2':

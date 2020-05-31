@@ -26,77 +26,77 @@ Graph initGraph(int n) {
 void initEdge(Graph G) {
 	
 	addEdge(G, 0, 2, 10, 187);
-	addEdge(G, 0, 7, 20, 219);
-	addEdge(G, 0, 14, 100, 1016);
-	addEdge(G, 0, 19, 500, 5213);
+	addEdge(G, 0, 7, 10, 219);
+	addEdge(G, 0, 14, 50, 1016);
+	addEdge(G, 0, 19, 100, 5213);
 
-	addEdge(G, 1, 3, 25, 248);
+	addEdge(G, 1, 3, 10, 248);
 	addEdge(G, 1, 8, 10, 126);
-	addEdge(G, 1, 9, 90, 960);
-	addEdge(G, 1, 10, 20, 245);
-	addEdge(G, 1, 12, 50, 561);
-	addEdge(G, 1, 13, 80, 843);
-	addEdge(G, 1, 17, 900, 9718);
+	addEdge(G, 1, 9, 50, 960);
+	addEdge(G, 1, 10, 10, 245);
+	addEdge(G, 1, 12, 20, 561);
+	addEdge(G, 1, 13, 50, 843);
+	addEdge(G, 1, 17, 100, 9718);
 
 	addEdge(G, 2, 0, 10, 187);
-	addEdge(G, 2, 3, 20, 234);
+	addEdge(G, 2, 3, 10, 234);
 
-	addEdge(G, 3, 1, 20, 248);
-	addEdge(G, 3, 2, 20, 234);
-	addEdge(G, 3, 4, 8, 80);
+	addEdge(G, 3, 1, 10, 248);
+	addEdge(G, 3, 2, 10, 234);
+	addEdge(G, 3, 4, 5, 80);
 
-	addEdge(G, 4, 3, 8, 80);
-	addEdge(G, 4, 5, 10, 190);
+	addEdge(G, 4, 3, 5, 80);
+	addEdge(G, 4, 5, 5, 190);
 
-	addEdge(G, 5, 4, 10, 190);
-	addEdge(G, 5, 8, 20, 295);
+	addEdge(G, 5, 4, 5, 190);
+	addEdge(G, 5, 8, 5, 295);
 
-	addEdge(G, 6, 7, 10, 105);
+	addEdge(G, 6, 7, 5, 105);
 
-	addEdge(G, 7, 0, 20, 219);
-	addEdge(G, 7, 6, 10, 105);
+	addEdge(G, 7, 0, 10, 219);
+	addEdge(G, 7, 6, 5, 105);
 
 	addEdge(G, 8, 1, 10, 126);
 
-	addEdge(G, 9, 1, 90, 960);
-	addEdge(G, 9, 11, 30, 320);
-	addEdge(G, 9, 12, 60, 632);
-	addEdge(G, 9, 13, 90, 932);
-	addEdge(G, 9, 14, 110, 1139);
+	addEdge(G, 9, 1, 50, 960);
+	addEdge(G, 9, 11, 20, 320);
+	addEdge(G, 9, 12, 20, 632);
+	addEdge(G, 9, 13, 50, 932);
+	addEdge(G, 9, 14, 50, 1139);
 
-	addEdge(G, 10, 1, 20, 245);
+	addEdge(G, 10, 1, 10, 245);
 
-	addEdge(G, 11, 9, 30, 320);
-	addEdge(G, 11, 13, 60, 652);
+	addEdge(G, 11, 9, 20, 320);
+	addEdge(G, 11, 13, 20, 652);
 
-	addEdge(G, 12, 1, 50, 561);
-	addEdge(G, 12, 9, 60, 632);
+	addEdge(G, 12, 1, 20, 561);
+	addEdge(G, 12, 9, 20, 632);
 
-	addEdge(G, 13, 1, 80, 843);
-	addEdge(G, 13, 9, 90, 932);
-	addEdge(G, 13, 11, 60, 652);
-	addEdge(G, 13, 17, 890, 8918);
+	addEdge(G, 13, 1, 50, 843);
+	addEdge(G, 13, 9, 50, 932);
+	addEdge(G, 13, 11, 20, 652);
+	addEdge(G, 13, 17, 100, 8918);
 
-	addEdge(G, 14, 0, 100, 1016);
-	addEdge(G, 14, 9, 110, 1139);
-	addEdge(G, 14, 15, 30, 302);
-	addEdge(G, 14, 16, 100, 1005);
-	addEdge(G, 14, 18, 850, 8543);
-	addEdge(G, 14, 19, 580, 5892);
+	addEdge(G, 14, 0, 50, 1016);
+	addEdge(G, 14, 9, 50, 1139);
+	addEdge(G, 14, 15, 10, 302);
+	addEdge(G, 14, 16, 10, 1005);
+	addEdge(G, 14, 18, 100, 8543);
+	addEdge(G, 14, 19, 100, 5892);
 
-	addEdge(G, 15, 14, 30, 302);
+	addEdge(G, 15, 14, 10, 302);
 
-	addEdge(G, 16, 14, 100, 1005);
+	addEdge(G, 16, 14, 10, 1005);
 
-	addEdge(G, 17, 1, 970, 9718);
-	addEdge(G, 17, 13, 890, 8918);
+	addEdge(G, 17, 1, 100, 9718);
+	addEdge(G, 17, 13, 100, 8918);
 
-	addEdge(G, 18, 14, 850, 8543);
-	addEdge(G, 18, 19, 890, 8933);
+	addEdge(G, 18, 14, 100, 8543);
+	addEdge(G, 18, 19, 100, 8933);
 
-	addEdge(G, 19, 0, 520, 5213);
-	addEdge(G, 19, 14, 580, 5892);
-	addEdge(G, 19, 18, 890, 8933);
+	addEdge(G, 19, 0, 100, 5213);
+	addEdge(G, 19, 14, 100, 5892);
+	addEdge(G, 19, 18, 100, 8933);
 
 }
 
