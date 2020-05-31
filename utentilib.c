@@ -12,6 +12,7 @@ void addNodoUtente(Utente** radUtente, char* nome, char* password) {
         aux->dx = NULL;
         aux->sx = NULL;
         aux->prenotazioniUtente = NULL;
+        aux->puntiUtente = 0;
         *radUtente = aux;
         return;
     }
