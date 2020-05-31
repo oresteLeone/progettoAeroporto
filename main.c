@@ -16,6 +16,7 @@ int main() {
 	list* destinazioni = NULL;
 
 	addNodoUtente(&radUtente, "_System", "admin");
+	addNodoUtente(&radUtente, "o", "o");
 	
 	G = initGraph(20);
 	destinazioni = initDestinazioni(destinazioni, G->nv);

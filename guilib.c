@@ -184,6 +184,7 @@ void menuUtente(Utente* User, Graph G, list* destinazioni) {
         {
         case '1':
             printf("\nPrenotazioni attive:\n");
+            printPrenotazioni(User->prenotazioniUtente);
             break;
         case '2':
             printf("\nPrenotazione:\n");
@@ -211,7 +212,8 @@ void menuUtente(Utente* User, Graph G, list* destinazioni) {
 }
 
 void catchPrenotazione(Utente* User, Graph G, list* destinazioni) {
-    unsigned int mode,tratt;
+    char mode;
+    int tratt;
     char partenza1[maxstring], arrivo1[maxstring];
     int indexP, indexA;
     int* padre = (int*)malloc(sizeof(int) * G->nv);
@@ -240,20 +242,29 @@ void catchPrenotazione(Utente* User, Graph G, list* destinazioni) {
 
         printf("\nInserisca '1' per la tratta piu' economica\nInserisca '2' per la tratta più breve\n");
         do{ 
-            tratt = catchRequest();
-            if (tratt != 1 || tratt != 2)
+            scanf("%d", &tratt);
+            if (tratt != 1 && tratt != 2)
                 printf("input non valido!");
-        } while (tratt != 1 || tratt != 2);
+        } while (tratt != 1 && tratt != 2);
         if (tratt == 1) {
+            printf("\nTRATTA ECONOMICA\n");
             Dijkstra_Economy(G, indexP, padre, d);
-            prenotazione* tmp = creaPrenotazioneEconomy(padre, indexP, indexA, destinazioni, d[indexA], G);
-            //DA CONTINUARE
+            path* patheco = extractPath(padre, indexP, indexA);
+            printf("\nIl percorso prevede le seguenti tratte: ");
+            printPath(patheco, destinazioni);
+            prenotazione* tmp = creaPrenotazioneEconomy(patheco, indexP, indexA, destinazioni, d[indexA], G);
+            printPrenotazioni(tmp);
+            if (User->prenotazioniUtente == NULL)
+                User->prenotazioniUtente = tmp;
+            else
+                User->prenotazioniUtente->next = tmp;
+            
         }
         else {
-
+            printf("\nTRATTA BREVE IN ALLESTIMENTO\n");
         }
             
-
+        getchar('\n');
 
         break;
     case '2':

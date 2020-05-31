@@ -24,13 +24,8 @@ Graph initGraph(int n) {
 }
 
 void initEdge(Graph G) {
-	addEdge(G, 0, 1, 20, 60);
-	addEdge(G, 1, 2, 40, 40);
-	addEdge(G, 2, 3, 30, 30);
-	addEdge(G, 0, 3, 10, 35);
-	addEdge(G, 3, 1, 5, 20);
-
-	addEdge(G, 0, 1, 10, 187);
+	
+	addEdge(G, 0, 2, 10, 187);
 	addEdge(G, 0, 7, 20, 219);
 	addEdge(G, 0, 14, 100, 1016);
 	addEdge(G, 0, 19, 500, 5213);

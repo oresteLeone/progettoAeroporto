@@ -4,14 +4,154 @@
 #include "prenotazionilib.h"
 
 
-prenotazione* creaPrenotazioneEconomy(int padre[], int partenza, int finale, list* destinazioni, int ecoTot, Graph G) {
+prenotazione* creaPrenotazioneEconomy(path* patheco, int partenza, int finale, list* destinazioni, int ecoTot, Graph G) {
 	prenotazione* tmp = (prenotazione*)malloc(sizeof(prenotazione));
 	strcpy(tmp->cittàPartenza, ricercaDestinazionePerNodo(destinazioni, partenza));
 	tmp->economyTot = ecoTot;
-	tmp->dest;//DA RIFARE
+	tmp->dest = creaDestinazione(partenza, patheco, destinazioni, G);
 	tmp->next = NULL;
-	tmp->distanzaTot = sommaDist();
+	tmp->distanzaTot = sommaDist(tmp->dest);
 
 	return tmp;
 }
 
+prenotazione* creaPrenotazioneDistance(path* pathdist, int partenza, int finale, list* destinazioni, int distTot, Graph G) {
+	prenotazione* tmp = (prenotazione*)malloc(sizeof(prenotazione));
+	strcpy(tmp->cittàPartenza, ricercaDestinazionePerNodo(destinazioni, partenza));
+	tmp->dest = creaDestinazione(partenza, pathdist, destinazioni, G);
+	tmp->next = NULL;
+	tmp->distanzaTot = distTot;
+	tmp->economyTot = sommaEconomy(tmp->dest);
+
+	return tmp;
+}
+
+destinazione* initDestinazione(edge arc, list* destinazioni) {
+	destinazione* tmp = (destinazione*)malloc(sizeof(destinazione));
+	strcpy(tmp->città, ricercaDestinazionePerNodo(destinazioni, arc->key));
+	tmp->disttratt = arc->pesoDistanza;
+	tmp->ecotratt = arc->pesoEconomy;
+	tmp->next = NULL;
+
+	return tmp;
+
+}
+
+edge trovaArco(edge list, int target) {
+	edge tmp = list;
+	if (tmp->key == target) {
+		return tmp;
+	}
+	else {
+		tmp = trovaArco(tmp->next, target);
+	}
+	return tmp;
+}
+void addonTail(destinazione* head, edge nodetarget, list* destinazioni) {
+	destinazione* p, * q;
+	p =initDestinazione(nodetarget,destinazioni);
+	q = head;
+	while (q->next != NULL)
+	{
+		q = q->next;
+	}
+	q->next = p;
+
+	
+}
+
+destinazione* creaDestinazione(int startnode, path* pathstart, list* destinazioni, Graph G) {
+	path* cursorpath=pathstart;
+	int prevnode = startnode;
+	destinazione* cursor;
+	destinazione* head = NULL;
+
+	for (cursorpath;cursorpath != NULL;cursorpath = cursorpath->next) {
+		edge arclist = (edge)malloc(sizeof(struct edgeType));
+		arclist=G->adj[prevnode];
+		edge nodetarget = trovaArco(arclist, cursorpath->node);
+		prevnode = nodetarget->key;
+		
+		
+		if (head == NULL)
+			head=initDestinazione(nodetarget,destinazioni);
+		else {
+			addonTail(head, nodetarget, destinazioni);
+		}
+		
+	}
+	return head;
+	
+}
+
+int sommaDist(destinazione* list) {
+	int tot=0;
+	if (list) {
+		tot = list->disttratt + sommaDist(list->next);
+	}
+	return tot;
+}
+
+int sommaEconomy(destinazione* list) {
+	int tot = 0;
+	if (list) {
+		tot = list->ecotratt + sommaDist(list->next);
+	}
+	return tot;
+}
+
+path* initPath(int node) {
+	path* tmp = (path*)malloc(sizeof(path));
+	tmp->node = node;
+	tmp->next = NULL;
+	return tmp;
+}
+path* extractPath(int padre[], int partenza, int finale) {
+	int cur;
+	path* head = NULL;
+	
+	for (cur = finale;cur != partenza;cur=padre[cur]) {
+		path* tmp = initPath(cur);
+		if (head == NULL)
+			head = tmp;
+		else {
+			tmp->next = head;
+			head = tmp;
+		}
+	}
+		
+	return head;
+}
+
+void printPath(path* path, list* destinazioni) {
+	if (path != NULL) {
+		printf(" -> %s", ricercaDestinazionePerNodo(destinazioni, path->node));
+		printPath(path->next, destinazioni);
+	}
+}
+
+void printPrenotazioni(prenotazione* listaPrenot) {
+	if (listaPrenot) {
+		printf("\nPrenotazione:\nPartenza %s ->",listaPrenot->cittàPartenza);
+		printDestinazioni(listaPrenot->dest);
+		printf("Costo: %d Distanza: %d\n", listaPrenot->economyTot,listaPrenot->distanzaTot);
+		if (listaPrenot->next) {
+			printPrenotazioni(listaPrenot->next);
+		}
+
+	}
+
+}
+
+void printDestinazioni(destinazione* list) {
+	if (list) {
+		if (list->next) {
+			printf("scalo %s -> ", list->città);
+			printDestinazioni(list->next);
+		}
+		else
+		{
+			printf("Destinazione: %s\n", list->città);
+		}
+	}
+}

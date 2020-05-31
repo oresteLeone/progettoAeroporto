@@ -62,7 +62,7 @@ void Dijkstra_Economy(Graph G, int s, int padre[], int d[]) {
                     d[p->key] = d[u] + p->pesoEconomy;
                     padre[p->key] = u;
                 }
-                while (p->next->next != NULL) {
+                while (p->next != NULL) {
                     if (d[p->next->key] == INFINITO) {
                         InsertMinCodaPriorità(&coda, p->next->key, d[u] + p->next->pesoEconomy);
                         d[p->next->key] = d[u] + p->next->pesoEconomy;
@@ -107,7 +107,7 @@ void Dijkstra_Distanza(Graph G, int s, int padre[], int d[]) {
                     d[p->key] = d[u] + p->pesoDistanza;
                     padre[p->key] = u;
                 }
-                while (p->next->next != NULL) {
+                while (p->next != NULL) {
                     if (d[p->next->key] == INFINITO) {
                         InsertMinCodaPriorità(&coda, p->next->key, d[u] + p->next->pesoDistanza);
                         d[p->next->key] = d[u] + p->next->pesoDistanza;
