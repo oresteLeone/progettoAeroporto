@@ -146,7 +146,7 @@ int sommaEconomy(destinazione* list) {
 //stampa delle prenotazioni di un utente
 void printPrenotazioni(prenotazione* listaPrenot) {
 	if (listaPrenot) {
-		printf("\nPrenotazione:\nPartenza %s ->",listaPrenot->cittàPartenza);
+		printf("\n\nPrenotazione:\n\nPartenza %s -> ",listaPrenot->cittàPartenza);
 		printDestinazioni(listaPrenot->dest);
 		printf("Costo: %d Distanza: %d\n", listaPrenot->economyTot,listaPrenot->distanzaTot);
 		if (listaPrenot->next) {

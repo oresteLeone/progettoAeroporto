@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "guilib.h"
+
 //Pulisce l'output
 void clrscr() {
     #ifdef _WIN32
@@ -70,7 +71,7 @@ void menuAdmin(Utente* radUtente, Graph G, list* destinazioni) {
         switch (richiesta)
         {
         case '1':
-            printf("\nAggiunta di una destinazione:\n");
+            printf("\n-Aggiunta di una destinazione-\n");
             addNode(G);
             printf("Inserisca il nome della destinazione: ");
             char tmpname[maxstring]; 
@@ -183,7 +184,7 @@ void menuUtente(Utente* User, Graph G, list* destinazioni) {
         switch (richiesta)
         {
         case '1':
-            printf("\nPrenotazioni attive:\n");
+            printf("\nPrenotazioni attive:");
             printPrenotazioni(User->prenotazioniUtente);
             break;
         case '2':
@@ -211,9 +212,23 @@ void menuUtente(Utente* User, Graph G, list* destinazioni) {
     }
 }
 
+int metaEconomica(int d[], int dim, int source)
+{
+    int meta = -1, min = INT_MAX;
+
+    for (int i = 0; i < dim; i++) {
+        if(d[i] != 0)
+            if (min > d[i]) {
+                min = d[i];
+                meta = i;
+            }
+    }
+
+    return meta;
+}
+
 void catchPrenotazione(Utente* User, Graph G, list* destinazioni) {
-    char mode,confirm;
-    int tratt;
+    char mode,confirm, tratt, meta;
     char partenza1[maxstring], arrivo1[maxstring];
     int indexP, indexA;
     int* padre = (int*)malloc(sizeof(int) * G->nv);
@@ -223,53 +238,60 @@ void catchPrenotazione(Utente* User, Graph G, list* destinazioni) {
     switch (mode)
     {
     case '1':
-        printf("inserire citta' di partenza: ");
+        printf("\nInserire citta' di partenza: ");
         strcpy(partenza1, getString());
         indexP = ricercaDestinazionePerCittà(destinazioni, partenza1);
         if (indexP == -1) {
-            printf("La citta non e' presente!");
+            printf("\nLa citta non e' presente!\n");
             printf("\nOperazione annullata...\n");
             break;
         }
-        printf("inserire citta' di arrivo: ");
+        printf("\nInserire citta' di arrivo: ");
         strcpy(arrivo1, getString());
         indexA = ricercaDestinazionePerCittà(destinazioni, arrivo1);
         if (indexA == -1) {
-            printf("La citta non e' presente!");
+            printf("\nLa citta non e' presente!\n");
             printf("\nOperazione annullata...\n");
             break;
         }
 
-        printf("\nInserisca '1' per la tratta piu' economica\nInserisca '2' per la tratta più breve\n");
-        do{ 
-            scanf("%d", &tratt);
-            if (tratt != 1 && tratt != 2)
-                printf("input non valido!");
-        } while (tratt != 1 && tratt != 2);
-        if (tratt == 1) {
+        printf("\nInserisca '1' per la tratta piu' economica\nInserisca '2' per la tratta piu' breve\n");
+        
+        do{
+            tratt = catchRequest();
+            if (tratt != '1' && tratt != '2')
+                printf("\nInput non valido!\n");
+        } while (tratt != '1' && tratt != '2');
+        if (tratt == '1') {
             printf("\nTRATTA ECONOMICA\n");
-            getchar('\n');
             Dijkstra_Economy(G, indexP, padre, d);
+            if (padre[indexA]<0 || padre[indexA]>G->nv - 1) {
+                printf("\nNon è possibile raggiungere la destinazione richiesta!\n");
+                printf("\nOperazione Annullata\n");
+                break;
+            }
             path* patheco = extractPath(padre, indexP, indexA);
             printf("\nIl percorso prevede le seguenti tratte: ");
             printPath(patheco, destinazioni);
             prenotazione* tmp = creaPrenotazioneEconomy(patheco, indexP, indexA, destinazioni, d[indexA], G);
             printPrenotazioni(tmp);
-            printf("\nInserisca '1' per confermare, '0' per annullare: ");
+            printf("\nInserisca '1' per confermare, '0' per annullare\n");
             confirm = catchRequest();
             if (confirm == '1') {
                 if (User->puntiUtente != 0) {
-                    printf("\nL'utente ha a disposizione uno sconto di %d,desidera utilizzarlo?('1'SI / '0'NO) ", User->puntiUtente);
+                    printf("\nL'utente ha a disposizione uno sconto di %d,desidera utilizzarlo?('1'SI / '0'NO): ", User->puntiUtente);
                     confirm = catchRequest();
                     if (confirm == '1') {
                         tmp->economyTot -= User->puntiUtente;
-                        printf("Lo sconto è stato applicato!\n");
+                        printf("\nLo sconto è stato applicato!\n");
                     }
                 }
                 User->prenotazioniUtente = addPrenotazione(User->prenotazioniUtente, tmp);
-                printf("Prenotazione Effettuata!\n");
+                printf("\nPrenotazione Effettuata!\n");
                 User->puntiUtente += ((tmp->economyTot) * 5 / 100);
-                printf("L'utente ha ottenuto un buono sconto di %d!\n", ((tmp->economyTot) * 5 / 100));
+
+                if(((tmp->economyTot) * 5 / 100) != 0)
+                    printf("\nL'utente ha ottenuto un buono sconto di %d!\n", ((tmp->economyTot) * 5 / 100));
                 
             }
             else
@@ -278,37 +300,97 @@ void catchPrenotazione(Utente* User, Graph G, list* destinazioni) {
         }
         else {
             printf("\nTRATTA BREVE \n");
-            getchar('\n');
             Dijkstra_Distanza(G, indexP, padre, d);
+            if (padre[indexA]<0 || padre[indexA]>G->nv - 1) {
+                printf("\nNon è possibile raggiungere la destinazione richiesta!\n");
+                printf("\nOperazione Annullata\n");
+                break;
+            }
             path* pathdist = extractPath(padre, indexP, indexA);
             printf("\nIl percorso prevede le seguenti tratte: ");
             printPath(pathdist, destinazioni);
             prenotazione* tmp = creaPrenotazioneDistance(pathdist, indexP, indexA, destinazioni, d[indexA], G);
             printPrenotazioni(tmp);
-            printf("\nInserisca '1' per confermare, '0' per annullare: ");
+            printf("\nInserisca '1' per confermare, '0' per annullare\n");
             confirm = catchRequest();
             if (confirm == '1') {
                 if (User->puntiUtente != 0) {
-                    printf("\nL'utente ha a disposizione uno sconto di %d,desidera utilizzarlo?('1'SI / '0'NO) ",User->puntiUtente);
+                    printf("\nL'utente ha a disposizione uno sconto di %d,desidera utilizzarlo?\n",User->puntiUtente);
                     confirm = catchRequest();
                     if (confirm == '1') {
                         tmp->economyTot -= User->puntiUtente;
-                        printf("Lo sconto è stato applicato!\n");
+                        printf("\nLo sconto e' stato applicato!\n");
                     }
                 }
                 User->prenotazioniUtente=addPrenotazione(User->prenotazioniUtente, tmp);
-                printf("Prenotazione Effettuata!\n");
+                printf("\nPrenotazione Effettuata!\n");
                 User->puntiUtente += ((tmp->economyTot) * 5 / 100);
-                printf("L'utente ha ottenuto un buono sconto di %d!\n", ((tmp->economyTot) * 5 / 100));
+                printf("\nL'utente ha ottenuto un buono sconto di %d!\n", ((tmp->economyTot) * 5 / 100));
             }
             else
                 printf("\nOperazione annullata!\n");
                 
         }
-            
         
         break;
     case '2':
+        printf("\nInserire citta' di partenza: ");
+        strcpy(partenza1, getString());
+        indexP = ricercaDestinazionePerCittà(destinazioni, partenza1);
+        if (indexP == -1) {
+            printf("La citta non e' presente!");
+            printf("\nOperazione annullata...\n");
+            break;
+        }
+
+        printf("\nInserisca '1' per la meta piu' economica\nInserisca '2' per la meta piu' gettonata\n");
+
+        do {
+            meta = catchRequest();
+            if (meta != '1' && meta != '2')
+                printf("\nInput non valido!\n");
+        } while (meta != '1' && meta != '2');
+
+
+        if (meta == '1') {
+            printf("\nMETA ECONOMICA\n");
+            Dijkstra_Economy(G, indexP, padre, d);
+            indexA = metaEconomica(d, G->nv, indexP);
+
+            if (indexA == -1) {
+                printf("\nDalla citta' da lei selezionata non sono previsti voli!\n");
+                printf("\nOperazione annullata...\n");
+                break;
+            }
+
+            path* patheco = extractPath(padre, indexP, indexA);
+            printf("\nIl percorso prevede le seguenti tratte: ");
+            printPath(patheco, destinazioni);
+            prenotazione* tmp = creaPrenotazioneEconomy(patheco, indexP, indexA, destinazioni, d[indexA], G);
+            printPrenotazioni(tmp);
+            printf("\nInserisca '1' per confermare, '0' per annullare\n");
+            confirm = catchRequest();
+            if (confirm == '1') {
+                if (User->puntiUtente != 0) {
+                    printf("\nL'utente ha a disposizione uno sconto di %d,desidera utilizzarlo?\n", User->puntiUtente);
+                    confirm = catchRequest();
+                    if (confirm == '1') {
+                        tmp->economyTot -= User->puntiUtente;
+                        printf("\nLo sconto e' stato applicato!\n");
+                    }
+                }
+                User->prenotazioniUtente = addPrenotazione(User->prenotazioniUtente, tmp);
+                printf("\nPrenotazione Effettuata!\n");
+                User->puntiUtente += ((tmp->economyTot) * 5 / 100);
+                printf("\nL'utente ha ottenuto un buono sconto di %d!\n", ((tmp->economyTot) * 5 / 100));
+
+            }
+            else
+                printf("\nOperazione annullata!\n");
+        }
+        else
+            printf("\nMeta piu' gettonata\n");
+        
         break;
     case '0':
         printf("\nOperazione annullata...\n");

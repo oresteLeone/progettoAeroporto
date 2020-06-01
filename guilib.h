@@ -20,6 +20,8 @@ void menuAdmin(Utente* radUtente, Graph G, list* destinazioni);
 //menù dell'utente
 void menuUtente(Utente* User, Graph G, list* destinazioni);
 
+int metaEconomica(int d[], int dim);
+
 void catchPrenotazione(Utente* User, Graph G, list* destinazioni);
 
 #endif
