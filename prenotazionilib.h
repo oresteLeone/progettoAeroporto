@@ -37,11 +37,11 @@ typedef struct pathType {
 //creazione nodo dei conflitti
 conflitto* initConflitto(char* motivo, char* city, prenotazione* dest);
 
-//funzione che inserisce un nuovo elemento nella lista dei conflitti
-conflitto* addConflitto(conflitto* disdette, char* motivo, char* city, prenotazione* dest);
+////funzione che inserisce un nuovo elemento nella lista dei conflitti
+//conflitto* addConflitto(conflitto* disdette, char* motivo, char* city, prenotazione* dest);
 
 //funzione che crea la lista dei conflitti per utente
-conflitto* Conflitti(prenotazione* UserList, conflitto* disdette, char* motivo, char* city);
+conflitto* Conflitti(prenotazione* UserList, char* motivo, char* city);
 
 //funzione che stampa la lista dei conflitti per utente
 void stampaConflitto(conflitto* disdette);

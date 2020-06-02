@@ -128,7 +128,19 @@ void visitaInPreOrdineUtenti(Utente* radUtente) {
 
 Utente* rimozionePrenotazione(Utente* radUtente, char* motivo, char* city) {
     if (radUtente) {
-        radUtente->disdette = Conflitti(radUtente->prenotazioniUtente, radUtente->disdette, motivo, city);
+        if (radUtente->disdette) {
+            conflitto* last = radUtente->disdette;
+            conflitto* head = last;
+            while (last->next != NULL) {
+                last = last->next;
+            }
+            last->next= Conflitti(radUtente->prenotazioniUtente, motivo, city);
+            radUtente->disdette = head;
+            
+        }
+            
+        else
+            radUtente->disdette = Conflitti(radUtente->prenotazioniUtente, motivo, city);
         radUtente->prenotazioniUtente = removePrenotazione(radUtente->prenotazioniUtente, city);
         radUtente->sx = rimozionePrenotazione(radUtente->sx, motivo, city);
         radUtente->dx = rimozionePrenotazione(radUtente->dx, motivo, city);
