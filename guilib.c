@@ -118,6 +118,7 @@ void menuAdmin(Utente* radUtente, Graph G, list** destinazioni) {
                 printf("Ok! Destinazione rimossa con successo!\n");
 
             removeNode(G, result);
+            radUtente = rimozionePrenotazione(radUtente, "Rimozione citta'", city);
             *destinazioni = eliminaDestinazione(*destinazioni, city);
 
             break;
@@ -184,8 +185,27 @@ void menuUtente(Utente* User, Graph G, list* destinazioni) {
         switch (richiesta)
         {
         case '1':
-            printf("\nPrenotazioni attive:");
-            printPrenotazioni(User->prenotazioniUtente);
+            if (User->disdette == NULL) {
+                if (User->prenotazioniUtente != NULL) {
+                    printf("\nPrenotazioni attive:");
+                    printPrenotazioni(User->prenotazioniUtente);
+                }
+                else
+                    printf("\nNon vi sono prenotazioni attive\n");
+
+            }
+            else {
+                printf("\nLe seguenti prenotazioni sono state disdette causa la rimozione di una citta'/tratta:\n");
+                stampaConflitto(User->disdette);
+
+                if (User->prenotazioniUtente != NULL) {
+                    printf("\nPrenotazioni attive:");
+                    printPrenotazioni(User->prenotazioniUtente);
+                }
+                else
+                    printf("\nNon vi sono prenotazioni attive\n");
+            }
+
             break;
         case '2':
             printf("\nPrenotazione:\n");

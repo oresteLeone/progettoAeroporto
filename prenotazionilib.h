@@ -20,11 +20,31 @@ typedef struct lista_destinazioni {
     struct lista_destinazioni* next;    //puntatore ad ulteriore destinazione, in caso di scalo
 } destinazione;
 
+//definizione struttura conflitti prenotazioni attive causa rimozione tratta/destinazione
+typedef struct conflictType {
+    char motivo[maxstring];
+    char citt‡Partenza[maxstring];
+    destinazione* dest;
+    struct conflictType* next;
+} conflitto;
+
 //definizione nodi del percorso minimo
 typedef struct pathType {
     int node;
     struct pathType* next;
 } path;
+
+//creazione nodo dei conflitti
+conflitto* initConflitto(char* motivo, char* city, prenotazione* dest);
+
+//funzione che inserisce un nuovo elemento nella lista dei conflitti
+conflitto* addConflitto(conflitto* disdette, char* motivo, char* city, prenotazione* dest);
+
+//funzione che crea la lista dei conflitti per utente
+conflitto* Conflitti(prenotazione* UserList, conflitto* disdette, char* motivo, char* city);
+
+//funzione che stampa la lista dei conflitti per utente
+void stampaConflitto(conflitto* disdette);
 
 //estrazione del percorso dal vettore padre
 path* extractPath(int padre[], int partenza, int finale);
@@ -67,6 +87,8 @@ void printDestinazioni(destinazione* list);
 
 prenotazione* addPrenotazione(prenotazione* UserList, prenotazione* new);
 
+int ricercaPerRemovePrenotazione(prenotazione* dest, char* city);
 
+prenotazione* removePrenotazione(prenotazione* UserList, char* city);
 
 #endif

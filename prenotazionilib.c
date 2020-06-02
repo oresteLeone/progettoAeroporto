@@ -181,3 +181,76 @@ prenotazione* addPrenotazione(prenotazione* UserList, prenotazione* new) {
 	}
 	return UserList;
 }
+
+int ricercaPerRemovePrenotazione(prenotazione* dest, char* city) {
+	int res = -1;
+
+	if (dest != NULL) {
+		if (strcmp(dest->cittàPartenza, city) == 0)
+			return 1;
+		else
+			res = ricercaPerRemovePrenotazione(dest->next, city);
+	}
+
+	return res;
+}
+
+prenotazione* removePrenotazione(prenotazione* UserList, char* city) {
+	if (UserList != NULL) {
+		if (strcmp(UserList->cittàPartenza, city) == 0 || ricercaPerRemovePrenotazione(UserList->dest, city) != -1) {
+			list* tmp = UserList->next;
+			free(UserList);
+			return tmp;
+		}
+		else
+			UserList->next = removePrenotazione(UserList->next, city);
+	}
+
+	return UserList;
+}
+
+//creazione nodo dei conflitti
+conflitto* initConflitto(char* motivo, char* city, prenotazione* dest) {
+
+	conflitto* tmp = (conflitto*)malloc(sizeof(conflitto));
+
+	strcpy(tmp->motivo, motivo);
+	strcpy(tmp->cittàPartenza, city);
+	tmp->dest = dest;
+	tmp->next = NULL;
+
+	return tmp;
+}
+
+//funzione che inserisce un nuovo elemento nella lista dei conflitti
+conflitto* addConflitto(conflitto* disdette, char* motivo, char* city, prenotazione* dest) {
+	if (disdette)
+		disdette->next = addConflitto(disdette->next, motivo, city, dest);
+	else
+		disdette = initConflitto(motivo, city, dest);
+
+	return disdette;
+}
+
+//funzione che crea la lista dei conflitti per utente
+conflitto* Conflitti(prenotazione* UserList, conflitto* disdette, char* motivo, char* city) {
+	if (UserList != NULL) {
+		if (strcmp(UserList->cittàPartenza, city) == 0 || ricercaPerRemovePrenotazione(UserList->dest, city) != -1) {
+			disdette = addConflitto(disdette, motivo, UserList->cittàPartenza, UserList->dest);
+		}
+		else
+			disdette = Conflitti(UserList->next, disdette, motivo, city);
+	}
+
+	return disdette;
+}
+
+void stampaConflitto(conflitto* disdette)
+{
+	if (disdette) {
+		printf("\nMotivo: %s\n", disdette->motivo);
+		printf("\nPartenza: %s -> ", disdette->cittàPartenza);
+		printDestinazioni(disdette->dest);
+		stampaConflitto(disdette->next);
+	}
+}

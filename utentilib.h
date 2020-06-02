@@ -7,7 +7,8 @@
 typedef struct nodo_utente {
     char nomeUtente[maxstring];         //chiave stringa del nodo utente
     char pswd[maxstring];            //password dell'utente
-    prenotazione* prenotazioniUtente;   //puntatore alla lista prenotazioni 
+    prenotazione* prenotazioniUtente;       //puntatore alla lista prenotazioni
+    conflitto* disdette;
     int puntiUtente;
     //puntatori ai sottoalberi destro e sinistro
     struct nodo_utente* sx;
@@ -34,6 +35,8 @@ Utente* referenceUtente(Utente* radUtente, char* nome);
 
 //funzione visita in Preordine ABR utenti
 void visitaInPreOrdineUtenti(Utente* radUtente);
+
+Utente* rimozionePrenotazione(Utente* radUtente, char* motivo, char* city);
 
 //funzione che cancella totalmente l'ABR utenti
 void eliminaABR(Utente* radUtente);

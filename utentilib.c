@@ -12,6 +12,7 @@ void addNodoUtente(Utente** radUtente, char* nome, char* password) {
         aux->dx = NULL;
         aux->sx = NULL;
         aux->prenotazioniUtente = NULL;
+        aux->disdette = NULL;
         aux->puntiUtente = 0;
         *radUtente = aux;
         return;
@@ -125,6 +126,17 @@ void visitaInPreOrdineUtenti(Utente* radUtente) {
     }
 }
 
+Utente* rimozionePrenotazione(Utente* radUtente, char* motivo, char* city) {
+    if (radUtente) {
+        radUtente->disdette = Conflitti(radUtente->prenotazioniUtente, radUtente->disdette, motivo, city);
+        radUtente->prenotazioniUtente = removePrenotazione(radUtente->prenotazioniUtente, city);
+        radUtente->sx = rimozionePrenotazione(radUtente->sx, motivo, city);
+        radUtente->dx = rimozionePrenotazione(radUtente->dx, motivo, city);
+    }
+
+    return radUtente;
+}
+
 //funzione che cancella totalmente l'ABR utenti
 void eliminaABR(Utente* radUtente)  {
     if (radUtente != NULL)
@@ -134,14 +146,3 @@ void eliminaABR(Utente* radUtente)  {
             free(radUtente);
         }
 }
-//
-////funzione per l'aggiunta di un nodo Prenotazione
-//prenotazione* AddNodoPrenotazioneToUser(prenotazione *head/*, dati da inserire*/) {
-//    if (head == NULL) {
-//        head=createPrenotazione();
-//    }
-//    else {
-//
-//        head = AddNodoPrenotazioneToUser(head->next);
-//    }
-//} 
