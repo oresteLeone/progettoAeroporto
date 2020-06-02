@@ -53,7 +53,7 @@ char* getString() {
 }
 
 //menù dell'admin
-void menuAdmin(Utente* radUtente, Graph G, list* destinazioni) {
+void menuAdmin(Utente* radUtente, Graph G, list** destinazioni) {
     char richiesta;
     int quit = 0;
 
@@ -76,7 +76,7 @@ void menuAdmin(Utente* radUtente, Graph G, list* destinazioni) {
             printf("Inserisca il nome della destinazione: ");
             char tmpname[maxstring]; 
             strcpy(tmpname, getString());
-            destinazioni = inserisciDestinazione(destinazioni, G->nv-1, tmpname);
+            *destinazioni = inserisciDestinazione(*destinazioni, G->nv-1, tmpname);
             break;
         case '2':
             printf("\nAggiunta di una tratta:\n");
@@ -85,14 +85,14 @@ void menuAdmin(Utente* radUtente, Graph G, list* destinazioni) {
             int eco, dist;
             printf("inserire citta' di partenza: ");
             strcpy(partenza, getString());
-            indexP = ricercaDestinazionePerCittà(destinazioni, partenza);
+            indexP = ricercaDestinazionePerCittà(*destinazioni, partenza);
             if (indexP == -1) {
                 printf("La citta non e' presente!\n");
                 break;
             }
             printf("inserire citta' di arrivo: ");
             strcpy(arrivo, getString());
-            indexA = ricercaDestinazionePerCittà(destinazioni, arrivo);
+            indexA = ricercaDestinazionePerCittà(*destinazioni, arrivo);
             if (indexA == -1) {
                 printf("La citta non e' presente!\n");
                 break;
@@ -109,7 +109,7 @@ void menuAdmin(Utente* radUtente, Graph G, list* destinazioni) {
             printf("Inserire citta' da rimuovere: ");
             char city[maxstring];
             strcpy(city, getString());
-            int result = ricercaDestinazionePerCittà(destinazioni, city);
+            int result = ricercaDestinazionePerCittà(*destinazioni, city);
             if (result == -1) {
                 printf("Non è possibile rimuovere la destinazione perche' non esiste.\n");
                 break;
@@ -118,7 +118,7 @@ void menuAdmin(Utente* radUtente, Graph G, list* destinazioni) {
                 printf("Ok! Destinazione rimossa con successo!\n");
 
             removeNode(G, result);
-            destinazioni = eliminaDestinazione(destinazioni, city);
+            *destinazioni = eliminaDestinazione(*destinazioni, city);
 
             break;
         case '4':
@@ -127,14 +127,14 @@ void menuAdmin(Utente* radUtente, Graph G, list* destinazioni) {
             int indexP2, indexA2;
             printf("Inserire citta' di partenza: ");
             strcpy(partenza2, getString());
-            indexP2 = ricercaDestinazionePerCittà(destinazioni, partenza2);
+            indexP2 = ricercaDestinazionePerCittà(*destinazioni, partenza2);
             if (indexP2 == -1) {
                 printf("La citta non e' presente!\n");
                 break;
             }
             printf("Inserire citta' di arrivo: ");
             strcpy(arrivo2, getString());
-            indexA2 = ricercaDestinazionePerCittà(destinazioni, arrivo2);
+            indexA2 = ricercaDestinazionePerCittà(*destinazioni, arrivo2);
             if (indexA2 == -1) {
                 printf("La citta non e' presente!\n");
                 break;
@@ -148,7 +148,7 @@ void menuAdmin(Utente* radUtente, Graph G, list* destinazioni) {
             break;
         case '6':
             printf("\nStampa Voli:\n\n");
-            printGraph(G, destinazioni);
+            printGraph(G, *destinazioni);
             break;
         case '0':
             printf("\nLogout in corso...\n");

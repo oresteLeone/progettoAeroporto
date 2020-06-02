@@ -53,7 +53,7 @@ int main() {
 					}
 
 					if (strcmp(nomeUtente, "_System") == 0)
-						menuAdmin(radUtente, G, destinazioni);
+						menuAdmin(radUtente, G, &destinazioni);
 					else
 						menuUtente(referenceUtente(radUtente, nomeUtente), G, destinazioni);
 				}

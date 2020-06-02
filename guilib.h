@@ -15,7 +15,7 @@ char catchRequest();
 char* getString();
 
 //menù dell'admin
-void menuAdmin(Utente* radUtente, Graph G, list* destinazioni);
+void menuAdmin(Utente* radUtente, Graph G, list** destinazioni);
 
 //menù dell'utente
 void menuUtente(Utente* User, Graph G, list* destinazioni);
