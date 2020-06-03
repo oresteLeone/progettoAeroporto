@@ -41,7 +41,9 @@ conflitto* initConflitto(char* motivo, char* city, prenotazione* dest);
 //conflitto* addConflitto(conflitto* disdette, char* motivo, char* city, prenotazione* dest);
 
 //funzione che crea la lista dei conflitti per utente
-conflitto* Conflitti(prenotazione* UserList, char* motivo, char* city);
+conflitto* ConflittiCittà(prenotazione* UserList, char* motivo, char* city);
+
+conflitto* ConflittiTratta(prenotazione* UserList, char* motivo, char* città1, char* città2);
 
 //funzione che stampa la lista dei conflitti per utente
 void stampaConflitto(conflitto* disdette);
@@ -87,8 +89,12 @@ void printDestinazioni(destinazione* list);
 
 prenotazione* addPrenotazione(prenotazione* UserList, prenotazione* new);
 
-int ricercaPerRemovePrenotazione(prenotazione* dest, char* city);
+int ricercaPerRemovePrenotazioneCittà(prenotazione* dest, char* city);
 
-prenotazione* removePrenotazione(prenotazione* UserList, char* city);
+prenotazione* removePrenotazioneCittà(prenotazione* UserList, char* city);
+
+int ricercaPerRemovePrenotazioneTratta(prenotazione* dest, char* città1, char* città2);
+
+prenotazione* removePrenotazioneTratta(prenotazione* UserList, char* città1, char* città2);
 
 #endif

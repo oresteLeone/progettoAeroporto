@@ -126,7 +126,7 @@ void visitaInPreOrdineUtenti(Utente* radUtente) {
     }
 }
 
-Utente* rimozionePrenotazione(Utente* radUtente, char* motivo, char* city) {
+Utente* rimozionePrenotazioneCittà(Utente* radUtente, char* motivo, char* city) {
     if (radUtente) {
         if (radUtente->disdette) {
             conflitto* last = radUtente->disdette;
@@ -134,16 +134,39 @@ Utente* rimozionePrenotazione(Utente* radUtente, char* motivo, char* city) {
             while (last->next != NULL) {
                 last = last->next;
             }
-            last->next= Conflitti(radUtente->prenotazioniUtente, motivo, city);
+            last->next= ConflittiCittà(radUtente->prenotazioniUtente, motivo, city);
             radUtente->disdette = head;
             
         }
             
         else
-            radUtente->disdette = Conflitti(radUtente->prenotazioniUtente, motivo, city);
-        radUtente->prenotazioniUtente = removePrenotazione(radUtente->prenotazioniUtente, city);
-        radUtente->sx = rimozionePrenotazione(radUtente->sx, motivo, city);
-        radUtente->dx = rimozionePrenotazione(radUtente->dx, motivo, city);
+            radUtente->disdette = ConflittiCittà(radUtente->prenotazioniUtente, motivo, city);
+        radUtente->prenotazioniUtente = removePrenotazioneCittà(radUtente->prenotazioniUtente, city);
+        radUtente->sx = rimozionePrenotazioneCittà(radUtente->sx, motivo, city);
+        radUtente->dx = rimozionePrenotazioneCittà(radUtente->dx, motivo, city);
+    }
+
+    return radUtente;
+}
+
+Utente* rimozionePrenotazioneTratta(Utente* radUtente, char* motivo, char* città1, char* città2) {
+    if (radUtente) {
+        if (radUtente->disdette) {
+            conflitto* last = radUtente->disdette;
+            conflitto* head = last;
+            while (last->next != NULL) {
+                last = last->next;
+            }
+            last->next = ConflittiTratta(radUtente->prenotazioniUtente, motivo, città1, città2);
+            radUtente->disdette = head;
+
+        }
+
+        else
+            radUtente->disdette = ConflittiTratta(radUtente->prenotazioniUtente, motivo, città1, città2);
+        radUtente->prenotazioniUtente = removePrenotazioneTratta(radUtente->prenotazioniUtente, città1, città2);
+        radUtente->sx = rimozionePrenotazioneTratta(radUtente->sx, motivo, città1, città2);
+        radUtente->dx = rimozionePrenotazioneTratta(radUtente->dx, motivo, città1, città2);
     }
 
     return radUtente;

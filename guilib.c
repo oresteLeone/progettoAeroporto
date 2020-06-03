@@ -118,7 +118,7 @@ void menuAdmin(Utente* radUtente, Graph G, list** destinazioni) {
                 printf("Ok! Destinazione rimossa con successo!\n");
 
             removeNode(G, result);
-            radUtente = rimozionePrenotazione(radUtente, "Rimozione citta'", city);
+            radUtente = rimozionePrenotazioneCittà(radUtente, "Rimozione citta'", city);
             *destinazioni = eliminaDestinazione(*destinazioni, city);
 
             break;
@@ -141,6 +141,7 @@ void menuAdmin(Utente* radUtente, Graph G, list** destinazioni) {
                 break;
             }
             removeEdge(G, indexP2, indexA2);
+            radUtente = rimozionePrenotazioneTratta(radUtente, "Rimozione tratta", partenza2, arrivo2);
 
             break;
         case '5':

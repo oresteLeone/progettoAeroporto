@@ -182,23 +182,23 @@ prenotazione* addPrenotazione(prenotazione* UserList, prenotazione* new) {
 	return UserList;
 }
 
-int ricercaPerRemovePrenotazione(prenotazione* dest, char* city) {
+int ricercaPerRemovePrenotazioneCittà(prenotazione* dest, char* city) {
 	int res = -1;
 
 	if (dest != NULL) {
 		if (strcmp(dest->cittàPartenza, city) == 0)
 			return 1;
 		else
-			res = ricercaPerRemovePrenotazione(dest->next, city);
+			res = ricercaPerRemovePrenotazioneCittà(dest->next, city);
 	}
 
 	return res;
 }
 
-prenotazione* removePrenotazione(prenotazione* UserList, char* city) {
+prenotazione* removePrenotazioneCittà(prenotazione* UserList, char* city) {
 	if (UserList) {
-		UserList->next = removePrenotazione(UserList->next, city);
-		if (strcmp(UserList->cittàPartenza, city) == 0 || ricercaPerRemovePrenotazione(UserList->dest, city) != -1) {
+		UserList->next = removePrenotazioneCittà(UserList->next, city);
+		if (strcmp(UserList->cittàPartenza, city) == 0 || ricercaPerRemovePrenotazioneCittà(UserList->dest, city) != -1) {
 			list* tmp = UserList->next;
 			free(UserList);
 			return tmp;
@@ -245,11 +245,11 @@ conflitto* initConflitto(char* motivo, char* city, prenotazione* dest) {
 //}
 
 //funzione che crea la lista dei conflitti per utente
-conflitto* Conflitti(prenotazione* UserList, char* motivo, char* city) {
+conflitto* ConflittiCittà(prenotazione* UserList, char* motivo, char* city) {
 	conflitto* tmp = (conflitto*)malloc(sizeof(conflitto));
 	if (UserList) {
-		tmp = Conflitti(UserList->next, motivo, city);
-		if (strcmp(UserList->cittàPartenza, city) == 0 || ricercaPerRemovePrenotazione(UserList->dest, city) != -1) {
+		tmp = ConflittiCittà(UserList->next, motivo, city);
+		if (strcmp(UserList->cittàPartenza, city) == 0 || ricercaPerRemovePrenotazioneCittà(UserList->dest, city) != -1) {
 			conflitto* new = initConflitto(motivo, UserList->cittàPartenza, UserList->dest);
 			new->next = tmp;
 			return new;
@@ -269,6 +269,48 @@ conflitto* Conflitti(prenotazione* UserList, char* motivo, char* city) {
 	}
 
 	return disdette;*/
+}
+
+int ricercaPerRemovePrenotazioneTratta(prenotazione* dest, char* città1, char* città2) {
+	int res = -1;
+
+	if (dest != NULL && dest->next != NULL) { 
+		if (strcmp(dest->cittàPartenza, città1) == 0 && strcmp(dest->next->cittàPartenza, città2) == 0)
+			return 1;
+		else
+			res = ricercaPerRemovePrenotazioneCittà(dest->next, città1, città2);
+	}
+
+	return res; 
+}
+
+prenotazione* removePrenotazioneTratta(prenotazione* UserList, char* città1, char* città2) {
+	if (UserList) { 
+		UserList->next = removePrenotazioneTratta(UserList->next, città1, città2);
+		if ((strcmp(UserList->cittàPartenza, città1) == 0 && strcmp(UserList->dest->città, città2) == 0) || ricercaPerRemovePrenotazioneTratta(UserList->dest, città1, città2) != -1) {
+			list* tmp = UserList->next;
+			free(UserList);
+			return tmp;
+		}
+	}
+
+	return UserList;
+}
+
+conflitto* ConflittiTratta(prenotazione* UserList, char* motivo, char* città1, char* città2) {
+	conflitto* tmp = (conflitto*)malloc(sizeof(conflitto));
+	if (UserList) {
+		tmp = ConflittiTratta(UserList->next, motivo, città1, città2);
+		if ((strcmp(UserList->cittàPartenza, città1) == 0 && strcmp(UserList->dest->città, città2) == 0) || ricercaPerRemovePrenotazioneTratta(UserList->dest, città1, città2) != -1) {
+			conflitto* new = initConflitto(motivo, UserList->cittàPartenza, UserList->dest);
+			new->next = tmp;
+			return new;
+		}
+	}
+	else {
+		tmp = NULL;
+	}
+	return tmp;
 }
 
 void stampaConflitto(conflitto* disdette)
