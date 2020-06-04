@@ -7,7 +7,7 @@
 
 void printList(edge L, list* destinazioni) {
     if (L != NULL) {
-        printf("%d %s Costo: %d Distanza: %d -> ", L->key, ricercaDestinazionePerNodo(destinazioni, L->key),L->pesoEconomy, L->pesoDistanza);
+        printf("%s Costo: %d Distanza: %d -> ", ricercaDestinazionePerNodo(destinazioni, L->key),L->pesoEconomy, L->pesoDistanza);
         printList(L->next,destinazioni);
     }
 }
