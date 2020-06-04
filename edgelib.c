@@ -102,3 +102,12 @@ int DimLista(edge L) {
         return 0;
     return 1 + DimLista(L->next);
 }
+
+//funzione per la visita di lista di adiacenza che aggiorna i gradi entranti nell array 
+void traverselistIN(edge list, int ArrayInDegree[]) {
+    if (list) {
+        traverselistIN(list->next, ArrayInDegree);
+        ArrayInDegree[list->key] += 1;
+    }
+
+}

@@ -38,4 +38,7 @@ void freeList(edge L);
 
 //restituisce la dimensione della lista di adiacenza
 int DimLista(edge L);
+
+//funzione per la visita di lista di adiacenza che aggiorna i gradi entranti nell array 
+void traverselistIN(edge list, int ArrayInDegree[]);
 #endif

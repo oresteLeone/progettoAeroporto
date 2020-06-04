@@ -36,5 +36,11 @@ void addEdge(Graph G, int source, int target, int eco, int dist);
 //rimuove arco da source a target
 void removeEdge(Graph G, int source, int target);
 
+//funzione che restituisce l'array coi gradi entranti
+int* gradiEntranti(Graph G, int ArrayInDegree[] );
+
+//restutuisce il primo nodo con grado entrante maggiore
+int nodeMaxInDegree(int ArrayInDegree[], int dim);
+
 
 #endif

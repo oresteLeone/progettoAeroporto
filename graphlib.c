@@ -182,3 +182,30 @@ void removeEdge(Graph G, int source, int target) {
 	}
 	
 }
+
+//funzione che restituisce l'array coi gradi entranti
+int* gradiEntranti(Graph G,int ArrayInDegree[]) {
+	int i;
+	for (i = 0;i < G->nv;i++) {
+		ArrayInDegree[i] = 0;
+	}
+	for (i = 0;i < G->nv;i++) {
+		traverselistIN(G->adj[i], ArrayInDegree);
+
+	}
+	return ArrayInDegree;
+}
+
+//restutuisce il primo nodo con grado entrante maggiore
+int nodeMaxInDegree(int ArrayInDegree[], int dim) {
+	int max = 0;
+	int node = 0;
+	int i;
+	for (i = 0;i < dim;i++) {
+		if (max < ArrayInDegree[i]) {
+			node = i;
+			max = ArrayInDegree[i];
+		}
+	}
+	return node;
+}
