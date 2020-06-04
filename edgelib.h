@@ -12,30 +12,30 @@ struct edgeType {
 };
 typedef struct edgeType* edge;
 
-
+//stampa lista di adiacenza
 void printList(edge L, list* destinazioni);
 
-
+//rimuove le occorenze del nodo rimosso dalle liste di adiacenza
 edge checkListRemoval(edge L, int node_to_remove);
 
-
+//inizializza un nodo della lista di adiacenza
 edge initNodeList(int info, int eco, int dist);
 
 
 edge randomList(int index, int mod);
 
-
+//inserisce un nodo in coda alla lista di adiacenza
 edge appendNodeList(edge L, int target, int eco, int dist);
 
-
+//inserisce un nodo in testa alla lista di adiacenza
 edge addNodeHead(edge L, int target, int eco, int dist);
 
-
+//rimuove la lista di adiacenza di un nodo
 edge removeNodeList(edge L, int target);
 
-
+//dealloca una lista
 void freeList(edge L);
 
-
+//restituisce la dimensione della lista di adiacenza
 int DimLista(edge L);
 #endif

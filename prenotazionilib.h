@@ -37,12 +37,10 @@ typedef struct pathType {
 //creazione nodo dei conflitti
 conflitto* initConflitto(char* motivo, char* city, prenotazione* dest);
 
-////funzione che inserisce un nuovo elemento nella lista dei conflitti
-//conflitto* addConflitto(conflitto* disdette, char* motivo, char* city, prenotazione* dest);
-
-//funzione che crea la lista dei conflitti per utente
+//funzione che crea la lista dei conflitti per utente in seguito a rimozione città
 conflitto* ConflittiCittà(prenotazione* UserList, char* motivo, char* city);
 
+//funzione che crea la lista dei conflitti per utente in seguito a rimozione tratta
 conflitto* ConflittiTratta(prenotazione* UserList, char* motivo, char* città1, char* città2);
 
 //funzione che stampa la lista dei conflitti per utente
@@ -90,14 +88,19 @@ void printPrenotazioni(prenotazione* listaPrenot);
 //stampa delle destinazioni di una prenotazione
 void printDestinazioni(destinazione* list);
 
+//funzione che aggiunge una prenotazione alla lista prenotazioni dell utente
 prenotazione* addPrenotazione(prenotazione* UserList, prenotazione* new);
 
+//funzione che controlla se la città rimossa facesse parte di una prenotazione
 int ricercaPerRemovePrenotazioneCittà(prenotazione* dest, char* city);
 
+//rimozione della prenotazione a seguito di una città rimossa
 prenotazione* removePrenotazioneCittà(prenotazione* UserList, char* city);
 
+//funzione che controlla se la tratta rimossa facesse parte di una prenotazione
 int ricercaPerRemovePrenotazioneTratta(prenotazione* dest, char* città1, char* città2);
 
+//rimozione della prenotazione a seguito di una tratta rimossa
 prenotazione* removePrenotazioneTratta(prenotazione* UserList, char* città1, char* città2);
 
 #endif

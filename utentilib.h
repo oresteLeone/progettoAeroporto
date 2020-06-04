@@ -36,8 +36,10 @@ Utente* referenceUtente(Utente* radUtente, char* nome);
 //funzione visita in Preordine ABR utenti
 void visitaInPreOrdineUtenti(Utente* radUtente);
 
+//aggiornamento prenotazioni a seguito di una rimozione di città
 Utente* rimozionePrenotazioneCittà(Utente* radUtente, char* motivo, char* city);
 
+//aggiornamento prenotazioni a seguito di una rimozione tratta 
 Utente* rimozionePrenotazioneTratta(Utente* radUtente, char* motivo, char* città1, char* città2);
 
 //funzione che cancella totalmente l'ABR utenti

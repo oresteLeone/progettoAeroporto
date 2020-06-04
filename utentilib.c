@@ -126,6 +126,7 @@ void visitaInPreOrdineUtenti(Utente* radUtente) {
     }
 }
 
+//aggiornamento prenotazioni a seguito di una rimozione di città
 Utente* rimozionePrenotazioneCittà(Utente* radUtente, char* motivo, char* city) {
     if (radUtente) {
         if (radUtente->disdette) {
@@ -149,6 +150,7 @@ Utente* rimozionePrenotazioneCittà(Utente* radUtente, char* motivo, char* city) 
     return radUtente;
 }
 
+//aggiornamento prenotazioni a seguito di una rimozione tratta
 Utente* rimozionePrenotazioneTratta(Utente* radUtente, char* motivo, char* città1, char* città2) {
     if (radUtente) {
         if (radUtente->disdette) {

@@ -235,6 +235,7 @@ void menuUtente(Utente* User, Graph G, list* destinazioni) {
     }
 }
 
+//restituisce il nodo con distanza minore
 int metaEconomica(int d[], int dim, int source)
 {
     int meta = -1, min = INT_MAX;
@@ -250,6 +251,7 @@ int metaEconomica(int d[], int dim, int source)
     return meta;
 }
 
+//funzione per la creazione di una prenotazione
 void catchPrenotazione(Utente* User, Graph G, list* destinazioni) {
     char mode,confirm, tratt, meta;
     char partenza1[maxstring], arrivo1[maxstring];

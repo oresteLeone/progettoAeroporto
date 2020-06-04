@@ -23,6 +23,7 @@ Graph initGraph(int n) {
 	return G;
 }
 
+//aggiunte iniziali degli archi del grafo 
 void initEdge(Graph G) {
 	
 	addEdge(G, 0, 2, 10, 187);

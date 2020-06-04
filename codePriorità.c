@@ -2,16 +2,19 @@
 #include <stdlib.h>
 #include "codePriorità.h"
 
+//inizializzazione
 void initCodaPriorità(CP* p, int n) {
     p->capacita = n;
     p->dim = CPVUOTA;
     p->H = (nodoCP*)malloc(n * sizeof(nodoCP));
 }
 
+//eliminazione
 void cancellaCodaPriorità(CP cp) {
     free(cp.H);
 }
 
+//controllo sullo stato della coda (vuota)
 int EmptyCodaPriorità(CP cp) {
     int res = 0;
 
@@ -21,6 +24,7 @@ int EmptyCodaPriorità(CP cp) {
     return res;
 }
 
+//controllo sullo stato della coda(piena)
 int FullCodaPriorità(CP cp) {
     int res = 0;
 
@@ -30,11 +34,13 @@ int FullCodaPriorità(CP cp) {
     return res;
 }
 
+//estrazione del primo elemento
 int MinCodaPriorità(CP cp) {
     if (EmptyCodaPriorità(cp) == 0)
         return(cp.H[0].valore);
 }
 
+//funzione dello scambio di elementi
 void scambio(nodoCP v[], int i, int j) {
     nodoCP tmp = v[i];
     v[i] = v[j];
@@ -43,6 +49,7 @@ void scambio(nodoCP v[], int i, int j) {
     v[j].posizione = j;
 }
 
+//inserimento del minimo
 void InsertMinCodaPriorità(CP* p, int x, int pr) {
     nodoCP tmp;
     int i;

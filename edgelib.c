@@ -5,6 +5,7 @@
 #include <time.h>
 #include "edgelib.h"
 
+//stampa lista di adiacenza
 void printList(edge L, list* destinazioni) {
     if (L != NULL) {
         printf("%s Costo: %d Distanza: %d -> ", ricercaDestinazionePerNodo(destinazioni, L->key),L->pesoEconomy, L->pesoDistanza);
@@ -12,7 +13,7 @@ void printList(edge L, list* destinazioni) {
     }
 }
 
-
+//rimuove le occorenze del nodo rimosso dalle liste di adiacenza
 edge checkListRemoval(edge L, int node_to_remove) {
     if (L != NULL) {
         L->next = checkListRemoval(L->next, node_to_remove);
@@ -28,6 +29,7 @@ edge checkListRemoval(edge L, int node_to_remove) {
     return L;
 }
 
+//inizializza un nodo della lista di adiacenza
 edge initNodeList(int info, int eco, int dist) {
     edge L = (edge)malloc(sizeof(struct edgeType));
     L->key = info;
@@ -47,7 +49,7 @@ edge randomList(int index, int mod) {
     return L;
 }
 
-
+//inserisce un nodo in coda alla lista di adiacenza
 edge appendNodeList(edge L, int target, int eco, int dist) {
     if (L != NULL) {
         if (L->key != target) {
@@ -60,7 +62,7 @@ edge appendNodeList(edge L, int target, int eco, int dist) {
     return L;
 }
 
-
+//inserisce un nodo in testa alla lista di adiacenza
 edge addNodeHead(edge L, int target, int eco, int dist) {
     if (L != NULL) {
         edge G = (edge)malloc(sizeof(struct edgeType));
@@ -73,7 +75,7 @@ edge addNodeHead(edge L, int target, int eco, int dist) {
     return initNodeList(target, eco, dist);
 }
 
-
+//rimuove la lista di adiacenza di un nodo
 edge removeNodeList(edge L, int target) {
     if (L != NULL) {
         if (L->key == target) {
@@ -86,7 +88,7 @@ edge removeNodeList(edge L, int target) {
     return L;
 }
 
-
+//dealloca una lista
 void freeList(edge L) {
     if (L != NULL) {
         freeList(L->next);
@@ -94,7 +96,7 @@ void freeList(edge L) {
     }
 }
 
-
+//restituisce la dimensione della lista di adiacenza
 int DimLista(edge L) {
     if (L == NULL)
         return 0;

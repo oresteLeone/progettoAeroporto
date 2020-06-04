@@ -171,6 +171,7 @@ void printDestinazioni(destinazione* list) {
 	}
 }
 
+//funzione che aggiunge una prenotazione alla lista prenotazioni dell utente
 prenotazione* addPrenotazione(prenotazione* UserList, prenotazione* new) {
 	
 	if (UserList) {
@@ -182,6 +183,7 @@ prenotazione* addPrenotazione(prenotazione* UserList, prenotazione* new) {
 	return UserList;
 }
 
+//funzione che controlla se la città rimossa facesse parte di una prenotazione
 int ricercaPerRemovePrenotazioneCittà(prenotazione* dest, char* city) {
 	int res = -1;
 
@@ -195,6 +197,7 @@ int ricercaPerRemovePrenotazioneCittà(prenotazione* dest, char* city) {
 	return res;
 }
 
+//rimozione della prenotazione a seguito di una città rimossa
 prenotazione* removePrenotazioneCittà(prenotazione* UserList, char* city) {
 	if (UserList) {
 		UserList->next = removePrenotazioneCittà(UserList->next, city);
@@ -223,7 +226,7 @@ conflitto* initConflitto(char* motivo, char* city, prenotazione* dest) {
 }
 
 
-//funzione che crea la lista dei conflitti per utente
+//funzione che crea la lista dei conflitti per utente in seguito a rimozione città
 conflitto* ConflittiCittà(prenotazione* UserList, char* motivo, char* city) {
 	conflitto* tmp = (conflitto*)malloc(sizeof(conflitto));
 	if (UserList) {
@@ -241,6 +244,7 @@ conflitto* ConflittiCittà(prenotazione* UserList, char* motivo, char* city) {
 	
 }
 
+//funzione che controlla se la tratta rimossa facesse parte di una prenotazione
 int ricercaPerRemovePrenotazioneTratta(prenotazione* dest, char* città1, char* città2) {
 	int res = -1;
 
@@ -254,6 +258,7 @@ int ricercaPerRemovePrenotazioneTratta(prenotazione* dest, char* città1, char* c
 	return res; 
 }
 
+//rimozione della prenotazione a seguito di una tratta rimossa
 prenotazione* removePrenotazioneTratta(prenotazione* UserList, char* città1, char* città2) {
 	if (UserList) { 
 		UserList->next = removePrenotazioneTratta(UserList->next, città1, città2);
@@ -267,6 +272,7 @@ prenotazione* removePrenotazioneTratta(prenotazione* UserList, char* città1, cha
 	return UserList;
 }
 
+//funzione che crea la lista dei conflitti per utente in seguito a rimozione tratta
 conflitto* ConflittiTratta(prenotazione* UserList, char* motivo, char* città1, char* città2) {
 	conflitto* tmp = (conflitto*)malloc(sizeof(conflitto));
 	if (UserList) {
@@ -283,6 +289,7 @@ conflitto* ConflittiTratta(prenotazione* UserList, char* motivo, char* città1, c
 	return tmp;
 }
 
+//funzione che stampa la lista dei conflitti per utente
 void stampaConflitto(conflitto* disdette)
 {
 	if (disdette) {
