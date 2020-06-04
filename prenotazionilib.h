@@ -48,6 +48,9 @@ conflitto* ConflittiTratta(prenotazione* UserList, char* motivo, char* città1, c
 //funzione che stampa la lista dei conflitti per utente
 void stampaConflitto(conflitto* disdette);
 
+//funzione che elimina totalmente la lista conflitti
+void cancellaConflitti(conflitto* list);
+
 //estrazione del percorso dal vettore padre
 path* extractPath(int padre[], int partenza, int finale);
 

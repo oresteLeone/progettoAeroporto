@@ -198,6 +198,8 @@ void menuUtente(Utente* User, Graph G, list* destinazioni) {
             else {
                 printf("\nLe seguenti prenotazioni sono state disdette causa la rimozione di una citta'/tratta:\n");
                 stampaConflitto(User->disdette);
+                cancellaConflitti(User->disdette);
+                User->disdette = NULL;
 
                 if (User->prenotazioniUtente != NULL) {
                     printf("\nPrenotazioni attive:");
@@ -284,7 +286,7 @@ void catchPrenotazione(Utente* User, Graph G, list* destinazioni) {
                 printf("\nInput non valido!\n");
         } while (tratt != '1' && tratt != '2');
         if (tratt == '1') {
-            printf("\nTRATTA ECONOMICA\n");
+            
             Dijkstra_Economy(G, indexP, padre, d);
             if (padre[indexA]<0 || padre[indexA]>G->nv - 1) {
                 printf("\nNon è possibile raggiungere la destinazione richiesta!\n");
@@ -292,7 +294,7 @@ void catchPrenotazione(Utente* User, Graph G, list* destinazioni) {
                 break;
             }
             path* patheco = extractPath(padre, indexP, indexA);
-            printf("\nIl percorso prevede le seguenti tratte: ");
+            printf("\nIl percorso piu' economico prevede le seguenti tratte: ");
             printPath(patheco, destinazioni);
             prenotazione* tmp = creaPrenotazioneEconomy(patheco, indexP, indexA, destinazioni, d[indexA], G);
             printPrenotazioni(tmp);
@@ -304,6 +306,7 @@ void catchPrenotazione(Utente* User, Graph G, list* destinazioni) {
                     confirm = catchRequest();
                     if (confirm == '1') {
                         tmp->economyTot -= User->puntiUtente;
+                        User->puntiUtente = 0;
                         printf("\nLo sconto è stato applicato!\n");
                     }
                 }
@@ -320,7 +323,7 @@ void catchPrenotazione(Utente* User, Graph G, list* destinazioni) {
             
         }
         else {
-            printf("\nTRATTA BREVE \n");
+            
             Dijkstra_Distanza(G, indexP, padre, d);
             if (padre[indexA]<0 || padre[indexA]>G->nv - 1) {
                 printf("\nNon è possibile raggiungere la destinazione richiesta!\n");
@@ -328,7 +331,7 @@ void catchPrenotazione(Utente* User, Graph G, list* destinazioni) {
                 break;
             }
             path* pathdist = extractPath(padre, indexP, indexA);
-            printf("\nIl percorso prevede le seguenti tratte: ");
+            printf("\nIl percorso piu' breve prevede le seguenti tratte: ");
             printPath(pathdist, destinazioni);
             prenotazione* tmp = creaPrenotazioneDistance(pathdist, indexP, indexA, destinazioni, d[indexA], G);
             printPrenotazioni(tmp);
@@ -340,6 +343,7 @@ void catchPrenotazione(Utente* User, Graph G, list* destinazioni) {
                     confirm = catchRequest();
                     if (confirm == '1') {
                         tmp->economyTot -= User->puntiUtente;
+                        User->puntiUtente = 0;
                         printf("\nLo sconto e' stato applicato!\n");
                     }
                 }
@@ -374,7 +378,7 @@ void catchPrenotazione(Utente* User, Graph G, list* destinazioni) {
 
 
         if (meta == '1') {
-            printf("\nMETA ECONOMICA\n");
+            
             Dijkstra_Economy(G, indexP, padre, d);
             indexA = metaEconomica(d, G->nv, indexP);
 
@@ -385,7 +389,7 @@ void catchPrenotazione(Utente* User, Graph G, list* destinazioni) {
             }
 
             path* patheco = extractPath(padre, indexP, indexA);
-            printf("\nIl percorso prevede le seguenti tratte: ");
+            printf("\nLa meta piu' economica prevede le seguenti tratte: ");
             printPath(patheco, destinazioni);
             prenotazione* tmp = creaPrenotazioneEconomy(patheco, indexP, indexA, destinazioni, d[indexA], G);
             printPrenotazioni(tmp);
@@ -397,6 +401,7 @@ void catchPrenotazione(Utente* User, Graph G, list* destinazioni) {
                     confirm = catchRequest();
                     if (confirm == '1') {
                         tmp->economyTot -= User->puntiUtente;
+                        User->puntiUtente = 0;
                         printf("\nLo sconto e' stato applicato!\n");
                     }
                 }
