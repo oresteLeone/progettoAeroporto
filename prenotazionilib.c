@@ -292,7 +292,7 @@ conflitto* ConflittiTratta(prenotazione* UserList, char* motivo, char* città1, c
 void stampaConflitto(conflitto* disdette)
 {
 	if (disdette) {
-		printf("\nMotivo: %s\n", disdette->motivo);
+		printf("\nMotivo: %s", disdette->motivo);
 		printf("\nPartenza: %s -> ", disdette->cittàPartenza);
 		printDestinazioni(disdette->dest);
 		stampaConflitto(disdette->next);

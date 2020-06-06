@@ -115,7 +115,7 @@ void menuAdmin(Utente* radUtente, Graph G, list** destinazioni) {
             strcpy(city, getString());
             int result = ricercaDestinazionePerCittà(*destinazioni, city);
             if (result == -1) {
-                printf("Non è possibile rimuovere la destinazione perche' non presente nell'elenco.\n");
+                printf("Non e' possibile rimuovere la destinazione perche' non presente nell'elenco.\n");
                 break;
             }
             clrscr();
@@ -146,7 +146,7 @@ void menuAdmin(Utente* radUtente, Graph G, list** destinazioni) {
             }
             removeEdge(G, indexP2, indexA2);
             clrscr();
-            printf("\nSe la tratta %s -> %s era presente, allora è stata rimossa.\n", partenza2, arrivo2);
+            printf("\nSe la tratta %s -> %s era presente, allora e' stata rimossa.\n", partenza2, arrivo2);
             radUtente = rimozionePrenotazioneTratta(radUtente, "Rimozione tratta", partenza2, arrivo2);
 
             break;
@@ -303,7 +303,7 @@ void catchPrenotazione(Utente* User, Graph G, list* destinazioni) {
             
             Dijkstra_Economy(G, indexP, padre, d);
             if (padre[indexA]<0 || padre[indexA]>G->nv - 1) {
-                printf("\nNon è possibile raggiungere la destinazione richiesta!\n");
+                printf("\nNon e' possibile raggiungere la destinazione richiesta!\n");
                 printf("\nOperazione Annullata\n");
                 break;
             }
@@ -328,7 +328,7 @@ void catchPrenotazione(Utente* User, Graph G, list* destinazioni) {
                             User->puntiUtente = 0;
                         }
                             
-                        printf("\nLo sconto è stato applicato!\n");
+                        printf("\nLo sconto e' stato applicato!\n");
                     }
                 }
                 User->prenotazioniUtente = addPrenotazione(User->prenotazioniUtente, tmp);
@@ -347,7 +347,7 @@ void catchPrenotazione(Utente* User, Graph G, list* destinazioni) {
             
             Dijkstra_Distanza(G, indexP, padre, d);
             if (padre[indexA]<0 || padre[indexA]>G->nv - 1) {
-                printf("\nNon è possibile raggiungere la destinazione richiesta!\n");
+                printf("\nNon e' possibile raggiungere la destinazione richiesta!\n");
                 printf("\nOperazione Annullata\n");
                 break;
             }
@@ -458,7 +458,7 @@ void catchPrenotazione(Utente* User, Graph G, list* destinazioni) {
             }
             Dijkstra_Distanza(G, indexP, padre, d);
             if (padre[indexA]<0 || padre[indexA]>G->nv - 1) {
-                printf("\nDalla citta' di partenza non è possibile raggiungere la meta gettonata!\n");
+                printf("\nDalla citta' di partenza non e' possibile raggiungere la meta gettonata!\n");
                 printf("\nOperazione Annullata\n");
                 break;
             }
