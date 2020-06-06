@@ -66,7 +66,6 @@ prenotazione* creaPrenotazioneDistance(path* pathdist, int partenza, int finale,
 destinazione* creaDestinazione(int startnode, path* pathstart, list* destinazioni, Graph G) {
 	path* cursorpath = pathstart;
 	int prevnode = startnode;
-	destinazione* cursor;
 	destinazione* head = NULL;
 
 	for (cursorpath;cursorpath != NULL;cursorpath = cursorpath->next) {
@@ -184,11 +183,11 @@ prenotazione* addPrenotazione(prenotazione* UserList, prenotazione* new) {
 }
 
 //funzione che controlla se la città rimossa facesse parte di una prenotazione
-int ricercaPerRemovePrenotazioneCittà(prenotazione* dest, char* city) {
+int ricercaPerRemovePrenotazioneCittà(destinazione* dest, char* city) {
 	int res = -1;
 
 	if (dest != NULL) {
-		if (strcmp(dest->cittàPartenza, city) == 0)
+		if (strcmp(dest->città, city) == 0)
 			return 1;
 		else
 			res = ricercaPerRemovePrenotazioneCittà(dest->next, city);
@@ -202,7 +201,7 @@ prenotazione* removePrenotazioneCittà(prenotazione* UserList, char* city) {
 	if (UserList) {
 		UserList->next = removePrenotazioneCittà(UserList->next, city);
 		if (strcmp(UserList->cittàPartenza, city) == 0 || ricercaPerRemovePrenotazioneCittà(UserList->dest, city) != -1) {
-			list* tmp = UserList->next;
+			prenotazione* tmp = UserList->next;
 			free(UserList);
 			return tmp;
 		}
@@ -213,7 +212,7 @@ prenotazione* removePrenotazioneCittà(prenotazione* UserList, char* city) {
 }
 
 //creazione nodo dei conflitti
-conflitto* initConflitto(char* motivo, char* city, prenotazione* dest) {
+conflitto* initConflitto(char* motivo, char* city, destinazione* dest) {
 
 	conflitto* tmp = (conflitto*)malloc(sizeof(conflitto));
 
@@ -245,14 +244,14 @@ conflitto* ConflittiCittà(prenotazione* UserList, char* motivo, char* city) {
 }
 
 //funzione che controlla se la tratta rimossa facesse parte di una prenotazione
-int ricercaPerRemovePrenotazioneTratta(prenotazione* dest, char* città1, char* città2) {
+int ricercaPerRemovePrenotazioneTratta(destinazione* dest, char* città1, char* città2) {
 	int res = -1;
 
 	if (dest != NULL && dest->next != NULL) { 
-		if (strcmp(dest->cittàPartenza, città1) == 0 && strcmp(dest->next->cittàPartenza, città2) == 0)
+		if (strcmp(dest->città, città1) == 0 && strcmp(dest->next->città, città2) == 0)
 			return 1;
 		else
-			res = ricercaPerRemovePrenotazioneCittà(dest->next, città1, città2);
+			res = ricercaPerRemovePrenotazioneTratta(dest->next, città1, città2);
 	}
 
 	return res; 
@@ -263,7 +262,7 @@ prenotazione* removePrenotazioneTratta(prenotazione* UserList, char* città1, cha
 	if (UserList) { 
 		UserList->next = removePrenotazioneTratta(UserList->next, città1, città2);
 		if ((strcmp(UserList->cittàPartenza, città1) == 0 && strcmp(UserList->dest->città, città2) == 0) || ricercaPerRemovePrenotazioneTratta(UserList->dest, città1, città2) != -1) {
-			list* tmp = UserList->next;
+			prenotazione* tmp = UserList->next;
 			free(UserList);
 			return tmp;
 		}

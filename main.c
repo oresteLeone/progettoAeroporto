@@ -16,7 +16,6 @@ int main() {
 	list* destinazioni = NULL;
 
 	addNodoUtente(&radUtente, "_System", "admin");
-	addNodoUtente(&radUtente, "o", "o");
 	
 	G = initGraph(20);
 	destinazioni = initDestinazioni(destinazioni, G->nv);
@@ -73,8 +72,8 @@ int main() {
 				strcpy(passw, getString());
 
 				addNodoUtente(&radUtente, nomeUtente, passw);
-
-				printf("\nPerfetto! Registrazione completata. Sta per essere reindirizzato alla schermata principale...\n");
+				clrscr();
+				printf("\nRegistrazione utente %s completata. \n", nomeUtente);
 
 				break;
 			case '0':
