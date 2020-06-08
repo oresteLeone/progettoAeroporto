@@ -4,19 +4,19 @@ definizione dati:
 
     Prenotazioni:
         Lista di liste presente all'interno dei campi del nodo utente 
-            la principale avrà come suoi campi la città di partenza, la prossima prenotazione e
+            la principale avrÃ  come suoi campi la cittÃ  di partenza, la prossima prenotazione e
             il puntatore alla lista delle destinazioni
-            Le destinazioni sono definite da Nome della città, il costo economico per arrivarci, 
+            Le destinazioni sono definite da Nome della cittÃ , il costo economico per arrivarci, 
             la distanza e un puntatore alla successiva ove ci sia.
 
             typedef struct lista_prenotazioni {
-                char[maxstring] cittàPartenza;
+                char[maxstring] cittÃ Partenza;
                 struct lista_prenotazioni *next;
                 struct lista_destinazioni *dest;
             } prenotazione;
 
             typedef struct lista_destinazioni{
-                char[maxstring] città;
+                char[maxstring] cittÃ ;
                 int economy;
                 int distanza;
                 struct lista_destinazioni *next;
@@ -43,7 +43,7 @@ definizione dati:
         numero vertici
         Lista di adiacenza**
 
-            l'arco avrà
+            l'arco avrÃ 
                 target
                 pesoEconomico
                 pesoDistanza
@@ -56,7 +56,7 @@ definizione dati:
 
             typedef struct edgeType {
 	            int key
-                char[maxstring] città;
+                char[maxstring] cittÃ ;
                 int pesoEconomy;
                 int pesoDistanza;
 	            struct edge *next;
@@ -64,26 +64,26 @@ definizione dati:
             
 interfacce:
 UI1: 
-    avvio programma con 3 possibilità:
+    avvio programma con 3 possibilitÃ :
         -Login;->UI1.a ->UI2
         -Registrazione;->UI1.b
         -Chiusura programma;
 
     Registrazione: avvio interfaccia e processo di registrazione, al termine di essa si ritorna al UI1.
     Chiusura: termina il programma.
-    Login: inserimento dei dati utenti e avvio del menù corrispettivo 
+    Login: inserimento dei dati utenti e avvio del menÃ¹ corrispettivo 
         (Sys, admin -> menuSys ; nomeutente,passutente -> menuUtente) 
         collegamento a UI2.
 
     UI1.b:
         Inserire nome utente -> // inserire password // -> Registrazione effettuata/rifiutata;
-        controllo se l'utente è già esistente affinché si abbia un risultato positivo o negativo.
+        controllo se l'utente Ã¨ giÃ  esistente affinchÃ© si abbia un risultato positivo o negativo.
         registrazione effettuata-> messaggio di riuscita -> UI1;
-        registrazione rifiutata-> messaggio di errore -> UI1 o si riprova finché non viene accettata?
+        registrazione rifiutata-> messaggio di errore -> UI1 o si riprova finchÃ© non viene accettata?
 
     UI1.a:
         inserire nome utente -> // inserire password // -> Login effettuato/rifiutato;
-        controllo sull'esistenza dell'utente, // o se la password è corretta//
+        controllo sull'esistenza dell'utente, // o se la password Ã¨ corretta//
         login effettuato-> messaggio di benvenuto -> UI2 Utente o System 
         login rifiutato -> messaggio di errore -> UI1 o riprova 
 
@@ -98,40 +98,40 @@ UI2:
         
         Logout: permette di uscire dalle credenziali di sistema, ritorno a UI1;
         Aggiungere Destinazione: permette di aggiungere un ulteriore nodo al grafo,
-            e quindi aggiungere una nuova città;
+            e quindi aggiungere una nuova cittÃ ;
         Aggiungere Tratta: permette di aggiungere un arco tra un nodo partenza e un nodo destinazione,
-            e quindi aggiungere un volo da una città ad un altra;
+            e quindi aggiungere un volo da una cittÃ  ad un altra;
         Rimozione Destinazione: permette di rimuovere il nodo di un grafo,
-            e quindi rimuovere una città (Conseguente rimozione di tutti gli archi da e per quel nodo);
+            e quindi rimuovere una cittÃ  (Conseguente rimozione di tutti gli archi da e per quel nodo);
         Rimozione Tratta: permette di rimuovere l'arco da un nodo all'altro,
-            e quindi rimuovere il volo da una città ad un altra 
+            e quindi rimuovere il volo da una cittÃ  ad un altra 
         
-        Sulle rimozioni è ben notare la necessità di controllare se questo possa aver influito le prenotazioni
+        Sulle rimozioni Ã¨ ben notare la necessitÃ  di controllare se questo possa aver influito le prenotazioni
         degli utenti
         Al termine di ogni operazione(ad eccezione di logout), si ritorna a UI2.1;
     
     UI2.1.a:
-        inserire nome città -> controllo -> aggiunta destinazione riuscita/fallita
-            controllo se la cità è già presente nel grafo 
-            se è presente, l'aggiunta fallisce con conseguente messaggio di errore
-            se non è presente, si effettua l'aggiunta del nodo con conseguente messaggio di riuscita
+        inserire nome cittÃ  -> controllo -> aggiunta destinazione riuscita/fallita
+            controllo se la citÃ  Ã¨ giÃ  presente nel grafo 
+            se Ã¨ presente, l'aggiunta fallisce con conseguente messaggio di errore
+            se non Ã¨ presente, si effettua l'aggiunta del nodo con conseguente messaggio di riuscita
             (provvedere anche a chiedere l'inserimento di archi?)
 
     UI2.1.b:
         inserire partenza -> controllo -> inserire destinazione -> controllo -> aggiunta tratta riuscita/fallita
-            controllo se le città inserite sono presenti nel grafo e se l'arco non è già presente
+            controllo se le cittÃ  inserite sono presenti nel grafo e se l'arco non Ã¨ giÃ  presente
             se uno di questi controlli fallisce allora l'aggiunta fallisce con messaggio di errore
             altrimenti viene aggiunto l'arco con conseguente messaggio di riuscita
 
     UI2.1.c:
-        inserire città da rimuovere -> controllo -> rimozione riuscita/fallita -> avviso agli utenti?
-            controllo se la città da rimuovere è presente nel grafo
-            a rimozione riuscita,se la città rimossa faceva parte di una prenotazione,
+        inserire cittÃ  da rimuovere -> controllo -> rimozione riuscita/fallita -> avviso agli utenti?
+            controllo se la cittÃ  da rimuovere Ã¨ presente nel grafo
+            a rimozione riuscita,se la cittÃ  rimossa faceva parte di una prenotazione,
             bisogna eliminare la prenotazione coinvolta e avvisare gli utenti coinvolti(il come da definire)
     UI2.1.d:
-        inserire la città di partenza ->controllo -> inserire la città di destinazione -> controllo x 2 ->
+        inserire la cittÃ  di partenza ->controllo -> inserire la cittÃ  di destinazione -> controllo x 2 ->
         -> rimozione tratta -> avviso agli utenti?
-        controllo se le città inserite esistono nel grafo e se esiste l'arco dalla città di partenza a quella d'arrivo
+        controllo se le cittÃ  inserite esistono nel grafo e se esiste l'arco dalla cittÃ  di partenza a quella d'arrivo
         se le condizioni sono soddisfatte, elimino l'arco e elimino le prenotazioni che usufruivano di quell arco avvisando
         gli utenti della rimozione della prenotazione 
 
@@ -157,16 +157,120 @@ UI2:
         -Partenza e destinazione;
         -Solo partenza;
 
-        i) inserire città partenza -> controllo -> inserire città destinazione -> controllo x2 ->
+        i) inserire cittÃ  partenza -> controllo -> inserire cittÃ  destinazione -> controllo x2 ->
             ->Tratta economica / tratta breve ->aggiunta/fallimento della prenotazione 
 
-            controllo della presenza delle città e dell'esistenza di almeno un percorso,
-            se il percorso è unico, sarà sia la più economica che la più breve
-            se esistono più percorsi, effettuare Dijikstra sia per peso di costo che per peso di distanza 
+            controllo della presenza delle cittÃ  e dell'esistenza di almeno un percorso,
+            se il percorso Ã¨ unico, sarÃ  sia la piÃ¹ economica che la piÃ¹ breve
+            se esistono piÃ¹ percorsi, effettuare Dijikstra sia per peso di costo che per peso di distanza 
             e chiedere la preferenza, riepilogo di costo e percorso a video con richiesta di conferma 
 
  
 
  Prova modifica by Pier 
+
+ SITUAZIONE INIZIALE GRAFO
+
+ ELENCO CITTA
+nodo 0 NAPOLI
+nodo 1 MILANO
+nodo 2 ROMA
+nodo 3 FIRENZE
+nodo 4 BOLOGNA
+nodo 5 GENOVA
+nodo 6 BRINDISI
+nodo 7 BARI
+nodo 8 TORINO
+nodo 9 LONDRA
+nodo 10 VENEZIA
+nodo 11 BRUXELLES
+nodo 12 PARIGI
+nodo 13 BERLINO
+nodo 14 BARCELLONA
+nodo 15 VALENCIA
+nodo 16 LISBONA
+nodo 17 TOKYO
+nodo 18 RIO
+nodo 19 NAIROBI
+
+ARCHI
+NAPOLI 0->1 ROMA costo distanza 187
+NAPOLI 0->7 BARI costo distanza 219
+NAPOLI 0->14 BARCELLONA costo distanza 1016
+NAPOLI 0->19 NAIROBI costo distanza 5213
+
+
+MILANO 1->3 FIRENZE costo distanza 248
+MILANO 1->8 TORINO costo distanza 126
+MILANO 1->9 LONDRA costo distanza 960
+MILANO 1->10 VENEZIA costo distanza 245
+MILANO 1->12 PARIGI costo distanza 561
+MILANO 1->13 BERLINO costo distanza 843
+MILANO 1->17 TOKYO costo distanza 9718
+
+
+ROMA 2->0 NAPOLI costo distanza 187
+ROMA 2->3 FIRENZE costo distanza 234
+
+FIRENZE 3->1 MILANO costo distanza 248
+FIRENZE 3->2 ROMA costo distanza 234
+FIRENZE 3->4 BOLOGNA costo distanza 80
+
+BOLOGNA 4->3 FIRENZE costo distanza 80
+BOLOGNA 4->5 GENOVA costo distanza 190
+
+GENOVA 5->4 BOLOGNA costo distanza 190
+GENOVA 5->8 TORINO costo distanza 295
+
+BRINDISI 6->7 BARI costo distanza 105
+
+BARI 7->0 NAPOLI costo distanza 219
+BARI 7->6 BRINDISI costo distanza 105
+
+TORINO 8->1 MILANO costo distanza 126
+
+LONDRA 9->1 MILANO costo distanza 960
+LONDRA 9->11 BRUXELLES costo distanza 320
+LONDRA 9->12 PARIGI costo distanza 632
+LONDRA 9->13 BERLINO costo distanza 932
+LONDRA 9->14 BARCELLONA costo distanza 1139
+
+VENEZIA 10->1 MILANO costo distanza 245
+
+BRUXELLES 11->9 LONDRA costo distanza 320
+BRUXELLES 11->13 BERLINO costo distanza 652
+
+PARIGI 12->1 MILANO costo distanza 561
+PARIGI 12->9 LONDRA costo distanza 632
+
+BERLINO 13->1 MILANO costo distanza 843
+BERLINO 13->9 LONDRA costo distanza 932
+BERLINO 13->11 BRUXELLES costo distanza 652
+BERLINO 13->17 TOKYO costo distanza 8918
+
+BARCELLONA 14->0 NAPOLI costo distanza 1016
+BARCELLONA 14->9 LONDRA costo distanza 1139
+BARCELLONA 14->15 VALENCIA costo distanza 302
+BARCELLONA 14->16 LISBONA costo distanza 1005
+BARCELLONA 14->18 RIO costo distanza 8543
+BARCELLONA 14->19 NAIROBI costo distanza 5892
+
+VALENCIA 15->14 BARCELLONA costo distanza 302
+
+LISBONA 16->14 BARCELLONA costo distanza 1005
+
+TOKYO 17->1 MILANO costo distanza 9718
+TOKYO 17->13 BERLINO costo distanza 8918
+
+RIO 18->14 BARCELLONA costo distanza 8543
+RIO 18->19 NAIROBI costo distanza 8933
+
+NAIROBI 19->0 NAPOLI costo distanza 5213
+NAIROBI 19->14 BARCELLONA costo distanza 5892
+NAIROBI 19->18 RIO costo distanza 8933
+
+
+
+
 
 
