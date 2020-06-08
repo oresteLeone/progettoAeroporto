@@ -22,8 +22,6 @@ int main() {
 
 	initEdge(G);
 
-
-
 	do 
 	{
 		printf("\nInserisca '1' per il Login\nInserisca '2' per Registrarsi\nInserisca '0' per Chiudere\n ");
@@ -32,6 +30,7 @@ int main() {
 		switch (richiesta) 
 		{
 			case '1':
+				clrscr();
 				printf("\nLogin:\n");
 
 				printf("\nNome utente: ");
@@ -59,13 +58,15 @@ int main() {
 
 				break;
 			case '2':
+				clrscr();
+				printf("\nRegistrazione:\n");
 				do 
 				{
 					printf("\nSalve, per registrarsi inserisca un username: ");
 					strcpy(nomeUtente, getString());
 					flag = ricercaUtente(radUtente, nomeUtente);
 					if (flag == 1)
-						printf("Nome utente non disponibile. Riprovi:\n");
+						printf("\nNome utente non disponibile. Riprovi:\n");
 					else
 						printf("\nOk! Ora inserisca una password: ");
 				} while (flag != 0);
@@ -77,10 +78,12 @@ int main() {
 
 				break;
 			case '0':
+				clrscr();
 				printf("\nChiusura in corso...\n");
 				quit = 1;
 				break;
 			default:
+				clrscr();
 				printf("\nRichiesta non valida\n");
 				break;
 		}

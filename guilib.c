@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <ctype.h>
 #include "guilib.h"
 
 //Pulisce l'output
@@ -52,6 +53,39 @@ char* getString() {
     return string;
 }
 
+//funzione per ottenere interi in input
+int getInteger() {
+    char buf[maxstring];
+    int res = 0, test;
+
+    do
+    {
+        test = 0;
+
+        scanf("%s", buf);
+
+        if (!strchr(buf, '\n'))     //newline does not exist
+            while (fgetc(stdin) != '\n');//discard until newline
+        else {
+            size_t len = strlen(buf);
+            buf[len - 1] = '\0';
+        }
+
+        for (int i = 0; i < strlen(buf); i++) {
+            if (isdigit(buf[i]) != 0)
+                test++;
+        }
+
+        if (test != strlen(buf))
+            printf("\nInput non valido, riprova: ");
+        else
+            res = atoi(buf);
+
+    } while (test != strlen(buf));
+
+    return res;
+}
+
 //menù dell'admin
 void menuAdmin(Utente* radUtente, Graph G, list** destinazioni) {
     char richiesta;
@@ -71,51 +105,61 @@ void menuAdmin(Utente* radUtente, Graph G, list** destinazioni) {
         switch (richiesta)
         {
         case '1':
-            printf("\n-Aggiunta di una destinazione-\n");
+            clrscr();
+            printf("\nAggiunta di una destinazione:\n");
             addNode(G);
-            printf("Inserisca il nome della destinazione: ");
+            printf("\nInserisca il nome della destinazione: ");
             char tmpname[maxstring]; 
             strcpy(tmpname, getString());
             *destinazioni = inserisciDestinazione(*destinazioni, G->nv-1, tmpname);
             clrscr();
-            printf("Destinazione %s aggiunta!\n",tmpname);
+            printf("\nDestinazione %s aggiunta!\n",tmpname);
             break;
         case '2':
+            clrscr();
             printf("\nAggiunta di una tratta:\n");
             char partenza[maxstring], arrivo[maxstring];
             int indexP, indexA;
             int eco, dist;
-            printf("inserire citta' di partenza: ");
+            printf("\nInserire citta' di partenza: ");
             strcpy(partenza, getString());
             indexP = ricercaDestinazionePerCittà(*destinazioni, partenza);
             if (indexP == -1) {
-                printf("La citta non e' presente!\n");
+                clrscr();
+                printf("\nLa citta non e' presente!\n");
+                printf("\nOperazione annullata!\n");
                 break;
             }
-            printf("inserire citta' di arrivo: ");
+            printf("\nInserire citta' di arrivo: ");
             strcpy(arrivo, getString());
             indexA = ricercaDestinazionePerCittà(*destinazioni, arrivo);
             if (indexA == -1) {
-                printf("La citta non e' presente!\n");
+                clrscr();
+                printf("\nLa citta non e' presente!\n");
+                printf("\nOperazione annullata!\n");
                 break;
             }
-            printf("Costo Economico: ");
-            scanf("%d", &eco);
-            printf("Costo Distanza: ");
-            scanf("%d", &dist);
+            printf("\nCosto Economico: ");
+            eco = getInteger();
+            //scanf("%d", &eco);
+            printf("\nCosto Distanza: ");
+            dist = getInteger();
+            //scanf("%d", &dist);
             addEdge(G, indexP, indexA, eco, dist);
-            getchar('\n');
+            //getchar('\n');
             clrscr();
-            printf("Aggiunta tratta %s -> %s costo %d distanza %d \n", partenza, arrivo, eco, dist);
+            printf("\nAggiunta tratta %s -> %s costo %d distanza %d\n", partenza, arrivo, eco, dist);
             break;
         case '3':
-            printf("\n-Rimozione di una destinazione-\n");
-            printf("Inserire citta' da rimuovere: ");
+            clrscr();
+            printf("\nRimozione di una destinazione:\n");
+            printf("\nInserire citta' da rimuovere: ");
             char city[maxstring];
             strcpy(city, getString());
             int result = ricercaDestinazionePerCittà(*destinazioni, city);
             if (result == -1) {
-                printf("Non e' possibile rimuovere la destinazione perche' non presente nell'elenco.\n");
+                clrscr();
+                printf("\nNon e' possibile rimuovere la destinazione perche' non presente nell'elenco.\n");
                 break;
             }
             clrscr();
@@ -127,21 +171,24 @@ void menuAdmin(Utente* radUtente, Graph G, list** destinazioni) {
 
             break;
         case '4':
-            printf("\n-Rimozione di una tratta-\n");
+            clrscr();
+            printf("\nRimozione di una tratta:\n");
             char partenza2[maxstring], arrivo2[maxstring];
             int indexP2, indexA2;
-            printf("Inserire citta' di partenza: ");
+            printf("\nInserire citta' di partenza: ");
             strcpy(partenza2, getString());
             indexP2 = ricercaDestinazionePerCittà(*destinazioni, partenza2);
             if (indexP2 == -1) {
-                printf("La citta non e' presente!\n");
+                clrscr();
+                printf("\nLa citta non e' presente!\n");
                 break;
             }
-            printf("Inserire citta' di arrivo: ");
+            printf("\nInserire citta' di arrivo: ");
             strcpy(arrivo2, getString());
             indexA2 = ricercaDestinazionePerCittà(*destinazioni, arrivo2);
             if (indexA2 == -1) {
-                printf("La citta non e' presente!\n");
+                clrscr();
+                printf("\nLa citta non e' presente!\n");
                 break;
             }
             removeEdge(G, indexP2, indexA2);
@@ -167,6 +214,7 @@ void menuAdmin(Utente* radUtente, Graph G, list** destinazioni) {
             printf("Logout effettuato!\n");
             break;
         default:
+            clrscr();
             printf("\nRichiesta non valida\n");
             break;
         }
@@ -228,16 +276,17 @@ void menuUtente(Utente* User, Graph G, list* destinazioni) {
             break;
         case '3':
             clrscr();
-            printf("\nLista citta':\n");
+            printf("\nLista citta':\n\n");
             stampaLista(destinazioni);
             break;
         case '0':
             printf("\nLogout in corso...\n");
             quit = 1;
             clrscr();
-            printf("Logout effettuato!\n");
+            printf("\nLogout effettuato!\n");
             break;
         default:
+            clrscr();
             printf("\nRichiesta non valida\n");
             break;
         }
@@ -248,11 +297,22 @@ void menuUtente(Utente* User, Graph G, list* destinazioni) {
 }
 
 //restituisce il nodo con distanza minore
-int metaEconomica(int d[], int dim, int source)
+int metaEconomica(edge L)
 {
     int meta = -1, min = INT_MAX;
 
-    for (int i = 0; i < dim; i++) {
+    while (L != NULL) {
+        if (min > L->pesoEconomy) {
+            min = L->pesoEconomy;
+            meta = L->key;
+        }
+
+        L = L->next;
+    }
+
+    return meta;
+
+    /*for (int i = 0; i < dim; i++) {
         if(d[i] != 0)
             if (min > d[i]) {
                 min = d[i];
@@ -260,7 +320,7 @@ int metaEconomica(int d[], int dim, int source)
             }
     }
 
-    return meta;
+    return meta;*/
 }
 
 //funzione per la creazione di una prenotazione
@@ -279,6 +339,7 @@ void catchPrenotazione(Utente* User, Graph G, list* destinazioni) {
         strcpy(partenza1, getString());
         indexP = ricercaDestinazionePerCittà(destinazioni, partenza1);
         if (indexP == -1) {
+            clrscr();
             printf("\nLa citta non e' presente!\n");
             printf("\nOperazione annullata...\n");
             break;
@@ -287,6 +348,7 @@ void catchPrenotazione(Utente* User, Graph G, list* destinazioni) {
         strcpy(arrivo1, getString());
         indexA = ricercaDestinazionePerCittà(destinazioni, arrivo1);
         if (indexA == -1) {
+            clrscr();
             printf("\nLa citta non e' presente!\n");
             printf("\nOperazione annullata...\n");
             break;
@@ -303,6 +365,7 @@ void catchPrenotazione(Utente* User, Graph G, list* destinazioni) {
             
             Dijkstra_Economy(G, indexP, padre, d);
             if (padre[indexA]<0 || padre[indexA]>G->nv - 1) {
+                clrscr();
                 printf("\nNon e' possibile raggiungere la destinazione richiesta!\n");
                 printf("\nOperazione Annullata\n");
                 break;
@@ -316,7 +379,7 @@ void catchPrenotazione(Utente* User, Graph G, list* destinazioni) {
             confirm = catchRequest();
             if (confirm == '1') {
                 if (User->puntiUtente != 0) {
-                    printf("\nL'utente ha a disposizione uno sconto di %d,desidera utilizzarlo? ('1'SI / '0'NO): ", User->puntiUtente);
+                    printf("\nL'utente ha a disposizione uno sconto di %d,desidera utilizzarlo? ('1'SI / '0'NO)\n", User->puntiUtente);
                     confirm = catchRequest();
                     if (confirm == '1') {
                         if (User->puntiUtente >= tmp->economyTot) {
@@ -332,6 +395,7 @@ void catchPrenotazione(Utente* User, Graph G, list* destinazioni) {
                     }
                 }
                 User->prenotazioniUtente = addPrenotazione(User->prenotazioniUtente, tmp);
+                clrscr();
                 printf("\nPrenotazione Effettuata!\n");
                 User->puntiUtente += ((tmp->economyTot) * 5 / 100);
 
@@ -339,14 +403,17 @@ void catchPrenotazione(Utente* User, Graph G, list* destinazioni) {
                     printf("\nL'utente ha ottenuto un buono sconto di %d!\n", ((tmp->economyTot) * 5 / 100));
                 
             }
-            else
+            else {
+                clrscr();
                 printf("\nOperazione annullata!\n");
+            }
             
         }
         else {
             
             Dijkstra_Distanza(G, indexP, padre, d);
             if (padre[indexA]<0 || padre[indexA]>G->nv - 1) {
+                clrscr();
                 printf("\nNon e' possibile raggiungere la destinazione richiesta!\n");
                 printf("\nOperazione Annullata\n");
                 break;
@@ -360,7 +427,7 @@ void catchPrenotazione(Utente* User, Graph G, list* destinazioni) {
             confirm = catchRequest();
             if (confirm == '1') {
                 if (User->puntiUtente != 0) {
-                    printf("\nL'utente ha a disposizione uno sconto di %d,desidera utilizzarlo? ('1'SI / '0'NO):",User->puntiUtente);
+                    printf("\nL'utente ha a disposizione uno sconto di %d,desidera utilizzarlo? ('1'SI / '0'NO)\n",User->puntiUtente);
                     confirm = catchRequest();
                     if (confirm == '1') {
                         if (User->puntiUtente >= tmp->economyTot) {
@@ -375,12 +442,18 @@ void catchPrenotazione(Utente* User, Graph G, list* destinazioni) {
                     }
                 }
                 User->prenotazioniUtente=addPrenotazione(User->prenotazioniUtente, tmp);
+                clrscr();
                 printf("\nPrenotazione Effettuata!\n");
                 User->puntiUtente += ((tmp->economyTot) * 5 / 100);
-                printf("\nL'utente ha ottenuto un buono sconto di %d!\n", ((tmp->economyTot) * 5 / 100));
+
+                if (((tmp->economyTot) * 5 / 100) != 0)
+                    printf("\nL'utente ha ottenuto un buono sconto di %d!\n", ((tmp->economyTot) * 5 / 100));
+                
             }
-            else
+            else {
+                clrscr();
                 printf("\nOperazione annullata!\n");
+            }
                 
         }
         
@@ -390,8 +463,9 @@ void catchPrenotazione(Utente* User, Graph G, list* destinazioni) {
         strcpy(partenza1, getString());
         indexP = ricercaDestinazionePerCittà(destinazioni, partenza1);
         if (indexP == -1) {
-            printf("La citta non e' presente!");
-            printf("\nOperazione annullata...\n");
+            clrscr();
+            printf("\nLa citta non e' presente!");
+            printf("\nOperazione annullata!\n");
             break;
         }
 
@@ -407,11 +481,13 @@ void catchPrenotazione(Utente* User, Graph G, list* destinazioni) {
         if (meta == '1') {
             
             Dijkstra_Economy(G, indexP, padre, d);
-            indexA = metaEconomica(d, G->nv, indexP);
+            
+            indexA = metaEconomica(G->adj[indexP]);
 
             if (indexA == -1) {
+                clrscr();
                 printf("\nDalla citta' da lei selezionata non sono previsti voli!\n");
-                printf("\nOperazione annullata...\n");
+                printf("\nOperazione annullata!\n");
                 break;
             }
 
@@ -424,7 +500,7 @@ void catchPrenotazione(Utente* User, Graph G, list* destinazioni) {
             confirm = catchRequest();
             if (confirm == '1') {
                 if (User->puntiUtente != 0) {
-                    printf("\nL'utente ha a disposizione uno sconto di %d,desidera utilizzarlo? ('1'SI / '0'NO):", User->puntiUtente);
+                    printf("\nL'utente ha a disposizione uno sconto di %d,desidera utilizzarlo? ('1'SI / '0'NO)\n", User->puntiUtente);
                     confirm = catchRequest();
                     if (confirm == '1') {
                         if (User->puntiUtente >= tmp->economyTot) {
@@ -439,13 +515,18 @@ void catchPrenotazione(Utente* User, Graph G, list* destinazioni) {
                     }
                 }
                 User->prenotazioniUtente = addPrenotazione(User->prenotazioniUtente, tmp);
+                clrscr();
                 printf("\nPrenotazione Effettuata!\n");
                 User->puntiUtente += ((tmp->economyTot) * 5 / 100);
-                printf("\nL'utente ha ottenuto un buono sconto di %d!\n", ((tmp->economyTot) * 5 / 100));
+                
+                if (((tmp->economyTot) * 5 / 100) != 0)
+                    printf("\nL'utente ha ottenuto un buono sconto di %d!\n", ((tmp->economyTot) * 5 / 100));
 
             }
-            else
+            else {
+                clrscr();
                 printf("\nOperazione annullata!\n");
+            }
         }
         else {
             
@@ -453,13 +534,15 @@ void catchPrenotazione(Utente* User, Graph G, list* destinazioni) {
             ArrayInDegree = gradiEntranti(G, ArrayInDegree);
             indexA = nodeMaxInDegree(ArrayInDegree, G->nv);
             if (indexA == indexP) {
-                printf("\nLa citta' di partenza risulta essere la meta più gettonata! Operazione annullata...");
+                clrscr();
+                printf("\nLa citta' di partenza risulta essere la meta più gettonata! Operazione annullata!\n");
                 break;
             }
             Dijkstra_Distanza(G, indexP, padre, d);
             if (padre[indexA]<0 || padre[indexA]>G->nv - 1) {
+                clrscr();
                 printf("\nDalla citta' di partenza non e' possibile raggiungere la meta gettonata!\n");
-                printf("\nOperazione Annullata\n");
+                printf("\nOperazione annullata!\n");
                 break;
             }
             path* pathdist = extractPath(padre, indexP, indexA);
@@ -471,7 +554,7 @@ void catchPrenotazione(Utente* User, Graph G, list* destinazioni) {
             confirm = catchRequest();
             if (confirm == '1') {
                 if (User->puntiUtente != 0) {
-                    printf("\nL'utente ha a disposizione uno sconto di %d,desidera utilizzarlo? ('1'SI / '0'NO):", User->puntiUtente);
+                    printf("\nL'utente ha a disposizione uno sconto di %d,desidera utilizzarlo? ('1'SI / '0'NO)\n", User->puntiUtente);
                     confirm = catchRequest();
                     if (confirm == '1') {
                         if (User->puntiUtente >= tmp->economyTot) {
@@ -486,20 +569,27 @@ void catchPrenotazione(Utente* User, Graph G, list* destinazioni) {
                     }
                 }
                 User->prenotazioniUtente = addPrenotazione(User->prenotazioniUtente, tmp);
+                clrscr();
                 printf("\nPrenotazione Effettuata!\n");
                 User->puntiUtente += ((tmp->economyTot) * 5 / 100);
-                printf("\nL'utente ha ottenuto un buono sconto di %d!\n", ((tmp->economyTot) * 5 / 100));
+                
+                if (((tmp->economyTot) * 5 / 100) != 0)
+                    printf("\nL'utente ha ottenuto un buono sconto di %d!\n", ((tmp->economyTot) * 5 / 100));
             }
-            else
+            else {
+                clrscr();
                 printf("\nOperazione annullata!\n");
+            }
 
         }
         
         break;
     case '0':
-        printf("\nOperazione annullata...\n");
+        clrscr();
+        printf("\nOperazione annullata!\n");
         break;
     default:
+        clrscr();
         printf("\nRichiesta non valida\n");
         break;
     }

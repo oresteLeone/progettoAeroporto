@@ -91,12 +91,12 @@ int controlloPassw(Utente* radUtente, char* nome, char* password) {
     if (radUtente) {
         if (strcmp(radUtente->nomeUtente, nome) == 0) {
             if (strcmp(radUtente->pswd, password) == 0)
-                corretto = 1;
+                return 1;
         }
         else if (strcmp(radUtente->nomeUtente, nome) < 0)
-            corretto = ricercaUtente(radUtente->dx, nome);
+            corretto = controlloPassw(radUtente->dx, nome, password);
         else if (strcmp(radUtente->nomeUtente, nome) > 0)
-            corretto = ricercaUtente(radUtente->sx, nome);
+            corretto = controlloPassw(radUtente->sx, nome, password);
     }
     return corretto;
 }
