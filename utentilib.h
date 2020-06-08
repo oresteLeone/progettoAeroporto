@@ -45,7 +45,5 @@ Utente* rimozionePrenotazioneTratta(Utente* radUtente, char* motivo, char* città
 //funzione che cancella totalmente l'ABR utenti
 void eliminaABR(Utente* radUtente);
 
-////funzione per l'aggiunta di un nodo Prenotazione
-//prenotazione* AddNodoPrenotazioneToUser(prenotazione* head);
 
 #endif
