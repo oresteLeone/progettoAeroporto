@@ -105,7 +105,7 @@ void menuAdmin(Utente* radUtente, Graph G, list** destinazioni) {
         switch (richiesta)
         {
         case '1':
-            clrscr();
+            
             printf("\nAggiunta di una destinazione:\n");
             addNode(G);
             printf("\nInserisca il nome della destinazione: ");
@@ -116,7 +116,7 @@ void menuAdmin(Utente* radUtente, Graph G, list** destinazioni) {
             printf("\nDestinazione %s aggiunta!\n",tmpname);
             break;
         case '2':
-            clrscr();
+            
             printf("\nAggiunta di una tratta:\n");
             char partenza[maxstring], arrivo[maxstring];
             int indexP, indexA;
@@ -151,7 +151,7 @@ void menuAdmin(Utente* radUtente, Graph G, list** destinazioni) {
             printf("\nAggiunta tratta %s -> %s costo %d distanza %d\n", partenza, arrivo, eco, dist);
             break;
         case '3':
-            clrscr();
+            
             printf("\nRimozione di una destinazione:\n");
             printf("\nInserire citta' da rimuovere: ");
             char city[maxstring];
@@ -171,7 +171,7 @@ void menuAdmin(Utente* radUtente, Graph G, list** destinazioni) {
 
             break;
         case '4':
-            clrscr();
+            
             printf("\nRimozione di una tratta:\n");
             char partenza2[maxstring], arrivo2[maxstring];
             int indexP2, indexA2;
@@ -312,15 +312,6 @@ int metaEconomica(edge L)
 
     return meta;
 
-    /*for (int i = 0; i < dim; i++) {
-        if(d[i] != 0)
-            if (min > d[i]) {
-                min = d[i];
-                meta = i;
-            }
-    }
-
-    return meta;*/
 }
 
 //funzione per la creazione di una prenotazione
@@ -395,7 +386,7 @@ void catchPrenotazione(Utente* User, Graph G, list* destinazioni) {
                     }
                 }
                 User->prenotazioniUtente = addPrenotazione(User->prenotazioniUtente, tmp);
-                clrscr();
+                
                 printf("\nPrenotazione Effettuata!\n");
                 User->puntiUtente += ((tmp->economyTot) * 5 / 100);
 
@@ -442,7 +433,7 @@ void catchPrenotazione(Utente* User, Graph G, list* destinazioni) {
                     }
                 }
                 User->prenotazioniUtente=addPrenotazione(User->prenotazioniUtente, tmp);
-                clrscr();
+                
                 printf("\nPrenotazione Effettuata!\n");
                 User->puntiUtente += ((tmp->economyTot) * 5 / 100);
 
@@ -515,7 +506,7 @@ void catchPrenotazione(Utente* User, Graph G, list* destinazioni) {
                     }
                 }
                 User->prenotazioniUtente = addPrenotazione(User->prenotazioniUtente, tmp);
-                clrscr();
+                
                 printf("\nPrenotazione Effettuata!\n");
                 User->puntiUtente += ((tmp->economyTot) * 5 / 100);
                 
@@ -569,7 +560,7 @@ void catchPrenotazione(Utente* User, Graph G, list* destinazioni) {
                     }
                 }
                 User->prenotazioniUtente = addPrenotazione(User->prenotazioniUtente, tmp);
-                clrscr();
+                
                 printf("\nPrenotazione Effettuata!\n");
                 User->puntiUtente += ((tmp->economyTot) * 5 / 100);
                 

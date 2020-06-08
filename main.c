@@ -30,7 +30,7 @@ int main() {
 		switch (richiesta) 
 		{
 			case '1':
-				clrscr();
+				
 				printf("\nLogin:\n");
 
 				printf("\nNome utente: ");
@@ -58,7 +58,7 @@ int main() {
 
 				break;
 			case '2':
-				clrscr();
+				
 				printf("\nRegistrazione:\n");
 				do 
 				{
